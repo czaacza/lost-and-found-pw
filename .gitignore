@@ -1,3 +1,9 @@
+#database volumes
+db/
+
+# venv
+backend/venv/
+
 # Logs
 logs
 *.log
