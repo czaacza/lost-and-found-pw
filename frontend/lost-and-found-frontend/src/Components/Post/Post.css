@@ -1,0 +1,74 @@
+/* Post.css */
+
+.post {
+  background: #fff;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.post-info .author {
+  font-weight: bold;
+}
+
+.tags {
+  margin: 0.5rem 0;
+}
+
+.tag {
+  margin-right: 0.5rem;
+}
+
+.date,
+.time {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.description {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.item-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.comments-section {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.comment-info {
+  margin-left: 1rem;
+}
+
+.comment-info .author {
+  font-weight: bold;
+}
+
+.comment-input {
+  margin-top: 1rem;
+}
