@@ -1,0 +1,108 @@
+/* PostComposer.css */
+
+* {
+  box-sizing: border-box;
+}
+p {
+  margin: 0;
+}
+
+.post-composer {
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  padding: 20px; /* Increased padding for more space */
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Adjust the profile picture to be at the top of the textarea */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-self: start; /* Align to the top of the flex container */
+  margin: 0;
+}
+.input-container {
+  padding-left: 0 !important;
+}
+
+.input-field {
+  border-radius: 20px;
+  border: 1px solid #ced0d4;
+  box-shadow: none;
+  padding: 16px; /* Increased padding for more text space */
+  font-size: 16px;
+  width: 100%;
+  resize: none; /* Prevents the textarea from being resizable */
+  overflow: auto; /* Adds scrollbars if text overflows */
+  /* margin-top: 8px; Add a bit of space between the profile picture and the textarea */
+}
+
+/* Separate the textarea and the action buttons */
+.separator {
+  border-top: 1px solid #ced0d4;
+  margin-top: 30px; /* Space above the separator */
+  margin-bottom: 30px; /* Space below the separator */
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* This will put space between the action buttons and the share button */
+  flex-wrap: wrap; /* Allows buttons to wrap to next line on small screens */
+  padding: 0 20px;
+}
+
+.action-buttons {
+  display: flex; /* Align action buttons in a row */
+  flex-grow: 1; /* Allow action buttons to fill the space */
+  gap: 10px; /* Space between action buttons */
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  font-size: 12px; /* Smaller font size for the buttons */
+  color: #606770;
+  padding: 8px 16px;
+  border-radius: 10000px;
+  background-color: #fefdfd;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.action p {
+  margin: 0;
+}
+
+.action .icon {
+  margin-right: 12px; /* Increase space between the icon and the text */
+}
+
+.share-button {
+  border-radius: 1000px !important;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+  padding: 8px 24px !important;
+  white-space: nowrap; /* Prevent the text in the button from wrapping */
+  font-weight: 400 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .actions {
+    justify-content: center; /* Center the buttons on small screens */
+  }
+
+  .action-buttons {
+    justify-content: center; /* Center the action buttons on small screens */
+    margin-bottom: 10px; /* Space between action buttons and share button */
+  }
+
+  .share-button {
+    width: 100%; /* Full-width button on smaller screens */
+  }
+}

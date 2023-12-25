@@ -1,0 +1,106 @@
+/* Header.css */
+
+/* Apply the Poppins font to the whole page */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Specific font for the logo to make it serif and a bit larger */
+.logo {
+  font-weight: 600;
+  font-size: 1.5rem; /* Increased size */
+  margin-right: 3rem !important;
+}
+
+/* Bootstrap navigation bar enhanced with additional padding and height */
+.navbar {
+  padding: 1rem 3.2rem !important; /* Increased padding */
+}
+
+/* Center the navigation menu */
+.navbar-collapse {
+  justify-content: center;
+}
+
+/* Navigation links with increased font size and adjusted margins for a clean look */
+.nav-link {
+  font-size: 1.2rem; /* Bigger font size */
+  margin: 0 0; /* Horizontal margin for spacing */
+  padding: 0.5rem 1.5rem !important; /* Increased padding for wider buttons */
+  font-weight: 400;
+}
+
+/* Specific styles for the Profile button to make it stand out and look professional */
+.profile-button {
+  border-radius: 30px !important; /* More rounded corners */
+  background-color: #007bff !important; /* Bootstrap primary color */
+  color: white !important;
+  padding: 0.5rem 2rem; /* Even more padding for a wider button */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  font-size: 1.2rem; /* Bigger font size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover and focus effects for profile button for interactivity */
+.profile-button:hover,
+.profile-button:focus {
+  background-color: #0056b3 !important; /* Darken the color slightly on hover/focus */
+  color: white; /* Ensure text color remains white */
+  text-decoration: none; /* No underline on hover/focus */
+}
+
+/* Additional styling for the university name/logo */
+.university-name {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem; /* Increased font size for better visibility */
+}
+
+.university-name-logo {
+  height: 50px; /* Slightly larger logo for better visibility */
+  margin-left: 1rem; /* Spacing from the text */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between; /* Aligns child elements on both ends */
+  align-items: center; /* Aligns items vertically */
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+}
+
+.header .navbar {
+  display: flex;
+  justify-content: space-between; /* Space out the child elements */
+  align-items: center; /* Align items vertically */
+  width: 100%; /* Take the full width of the header */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Search field container */
+.search-container {
+  margin-left: 2rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #606770;
+}
+
+.search-field {
+  font-size: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 2.5rem; /* Padding left includes space for the icon */
+  border-radius: 20px; /* Rounded borders */
+  border: 1px solid #ced0d4;
+  width: 200px; /* Adjust width as needed */
+}
