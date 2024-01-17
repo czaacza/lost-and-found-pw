@@ -5,15 +5,14 @@ import './Post.css'; // Make sure to create a Post.css file for styling
 import profilePic from '../../img/avatar-placeholder.png';
 import boots from '../../img/boots.jpg';
 
-function Post() {
+function Post({ post }) {
   // Dummy data for the example, you would replace this with actual props or state
   const postInfo = {
-    author: 'Mr. Rogers',
-    tags: ['Gmach Chemii', 'Sala 434'],
-    date: '14 October',
-    time: '3-4 pm',
-    description:
-      'Hej zgubiłem swoje buty wczoraj, jak ktoś widział to proszę o kontakt pod +48 123456789. Buty mają dla mnie wartość sentymentalną',
+    author: post.userId.username,
+    tags: post.tags,
+    date: post.createdAt.slice(0, 10),
+    time: post.createdAt.slice(11, 16),
+    description: post.text || '',
     imageUrl: '../../img/boots.jpg',
   };
 

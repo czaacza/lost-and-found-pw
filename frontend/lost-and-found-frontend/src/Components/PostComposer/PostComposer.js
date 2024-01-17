@@ -1,6 +1,6 @@
 // PostComposer.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import './PostComposer.css'; // Make sure to create a PostComposer.css file for styling
 import profilePic from '../../img/avatar-placeholder.png'; // Replace with the path to your profile picture
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,15 +8,37 @@ import {
   faImage,
   faUserTag,
   faMapMarkerAlt,
-  faSmile,
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../context/AuthContext';
+import { useGlobalContext } from '../../context/GlobalContext';
 
-function PostComposer() {
+function PostComposer({ postType }) {
+  const { user } = useAuth();
+  const { addPost } = useGlobalContext();
+
+  const [text, setText] = useState('');
+  const [photos, setPhotos] = useState([]);
+  const [tags, setTags] = useState([]);
+
+  const handleAddPost = async () => {
+    const postToAdd = {
+      userId: user.id,
+      text,
+      date: new Date(),
+      category: postType,
+      photos,
+      tags,
+      likes: [],
+      comments: [],
+    };
+    await addPost(postToAdd);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle the submit action here
-    console.log('Form submitted');
+    handleAddPost();
   };
 
   return (
@@ -30,6 +52,8 @@ function PostComposer() {
             className="form-control input-field"
             placeholder="Please describe the item you lost or found..."
             rows="3" // Starts with 3 rows, but you can change this number
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
         </div>
       </div>
@@ -47,7 +71,7 @@ function PostComposer() {
           </div>
         </div>
         <div className="col-auto">
-          <button type="submit" className="btn btn-primary share-button">
+          <button type="submit" className="share-button">
             <FontAwesomeIcon icon={faPaperPlane} />
             <p>Post</p>
           </button>

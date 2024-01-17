@@ -28,13 +28,6 @@
   min-width: 100px;
 }
 
-/* Active state for switch button */
-.switch-btn.active {
-  background-color: #007bff; /* Active background color */
-  color: white; /* Active text color */
-  border-color: #007bff; /* Active border color */
-}
-
 .write-post-btn {
   width: 100%;
   margin-bottom: 15px;

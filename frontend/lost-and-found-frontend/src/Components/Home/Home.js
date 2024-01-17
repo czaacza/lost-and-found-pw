@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import './Home.css';
 import Post from '../Post/Post';
 import PostComposer from '../PostComposer/PostComposer';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 function Home() {
-  const [postType, setPostType] = useState('lost'); // 'lost' or 'found'
+  const [postType, setPostType] = useState('LOST'); // 'lost' or 'found'
 
   // Dummy posts data array. Replace this with actual data.
-  const posts = {
-    lost: [<Post key="1" />, <Post key="2" />], // Replace with lost posts
-    found: [<Post key="3" />, <Post key="4" />], // Replace with found posts
-  };
+  const { posts } = useGlobalContext();
 
   return (
     <div className="container home">
@@ -33,24 +31,28 @@ function Home() {
           <div className="switch-buttons">
             <button
               className={`btn switch-btn ${
-                postType === 'lost' ? 'active' : ''
+                postType === 'LOST' ? 'active' : ''
               }`}
-              onClick={() => setPostType('lost')}
+              onClick={() => setPostType('LOST')}
             >
               Lost
             </button>
             <button
               className={`btn switch-btn ${
-                postType === 'found' ? 'active' : ''
+                postType === 'FOUND' ? 'active' : ''
               }`}
-              onClick={() => setPostType('found')}
+              onClick={() => setPostType('FOUND')}
             >
               Found
             </button>
           </div>
-          <PostComposer />
+          <PostComposer postType={postType} />
           {/* Render posts based on the selected post type */}
-          {posts[postType]}
+          {/* IF POSTS EXIST AND IS ARRAY*/}
+          {posts &&
+            posts
+              .filter((post) => post.category === postType)
+              .map((post) => <Post key={post._id} post={post} />)}
         </div>
 
         {/* Right Column */}

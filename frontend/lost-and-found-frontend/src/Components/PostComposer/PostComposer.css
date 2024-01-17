@@ -83,12 +83,21 @@ p {
 .share-button {
   border-radius: 1000px !important;
   display: flex;
-  align-items: center;
+  align-items: center !important;
+  justify-content: center;
+  background-color: #1877f2 !important;
   gap: 7px;
+  color: #fefdfd !important;
+  border: none !important;
+
   justify-content: center;
   padding: 8px 24px !important;
   white-space: nowrap; /* Prevent the text in the button from wrapping */
   font-weight: 400 !important;
+}
+
+.share-button p {
+  margin-bottom: 0;
 }
 
 /* Responsive adjustments */

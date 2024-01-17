@@ -5,7 +5,7 @@ import './Header.css';
 import logo from '../../img/wut-logo-text.png'; // Replace with the actual path to your logo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
