@@ -60,6 +60,7 @@
 
 .posts-column {
   padding-top: 0;
+  padding: 0 6.4rem !important;
 }
 
 .right-column {
@@ -91,6 +92,12 @@
 }
 
 .posts {
-  margin-top: 60px;
+  /* padding: 0 3.2rem; */
 }
+
+.posts-column h2 {
+  margin-bottom: 20px !important;
+  color: #333;
+}
+
 /* Add additional media queries and styling for further responsiveness */

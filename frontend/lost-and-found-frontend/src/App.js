@@ -21,7 +21,7 @@ function App() {
 
     return (
       // add the containerCentered style if user is logged in
-      <div>
+      <div className="bg-gray-50">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />

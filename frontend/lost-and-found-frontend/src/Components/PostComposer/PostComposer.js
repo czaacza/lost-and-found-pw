@@ -43,7 +43,7 @@ function PostComposer({ postType }) {
 
   return (
     <form
-      className="post-composer container rounded-xl border p-4 shadow-md w-11/12 "
+      className="post-composer container rounded-xl border p-4 shadow-md w-10/12 "
       onSubmit={handleSubmit}
     >
       <div className="row ">
@@ -52,7 +52,7 @@ function PostComposer({ postType }) {
         </div>
         <div className="col input-container">
           <textarea
-            className="form-control input-field"
+            className="form-control input-field bg-gray-50"
             placeholder="Please describe the item you lost or found..."
             rows="3" // Starts with 3 rows, but you can change this number
             value={text}
@@ -63,13 +63,13 @@ function PostComposer({ postType }) {
       <div className="separator"></div>
       <div className="actions">
         <div className="action-buttons">
-          <div className="action">
+          <div className="action bg-gray-50">
             <FontAwesomeIcon icon={faImage} /> <p> Photo or Video</p>
           </div>
-          <div className="action ">
+          <div className="action bg-gray-50">
             <FontAwesomeIcon icon={faUserTag} /> <p>Tag</p>
           </div>
-          <div className="action ">
+          <div className="action bg-gray-50">
             <FontAwesomeIcon icon={faMapMarkerAlt} /> <p>Location</p>
           </div>
         </div>

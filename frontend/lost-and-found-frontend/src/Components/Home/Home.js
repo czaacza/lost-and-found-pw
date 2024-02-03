@@ -11,10 +11,10 @@ function Home() {
   const { posts } = useGlobalContext();
 
   return (
-    <div className="container home">
+    <div className="container home ">
       <div className="row">
         {/* Left Column */}
-        <div className="col-md-3 left-column">
+        <div className="col-md-2 left-column">
           <div className="sort-section">
             <p>Sort with:</p>
             <div className="buttons-row">
@@ -26,29 +26,34 @@ function Home() {
         </div>
 
         {/* Middle Column */}
-        <div className="col-md-6 posts-column">
+        <div className="col-md-8 posts-column">
           {/* Switch buttons for Lost and Found */}
           <div className="switch-buttons">
             <button
-              className={`btn switch-btn ${
-                postType === 'LOST' ? 'active' : ''
-              }`}
+              type="button"
+              className={`text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700}`}
               onClick={() => setPostType('LOST')}
             >
               Lost
             </button>
+
             <button
-              className={`btn switch-btn ${
-                postType === 'FOUND' ? 'active' : ''
-              }`}
+              type="button"
+              className={`text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700}`}
               onClick={() => setPostType('FOUND')}
             >
               Found
             </button>
           </div>
+          <h2 class="text-3xl font-extrabold dark:text-white">
+            Add a new post
+          </h2>
           <PostComposer postType={postType} />
           {/* Render posts based on the selected post type */}
           {/* IF POSTS EXIST AND IS ARRAY*/}
+          <h2 class="text-3xl font-extrabold dark:text-white  posts-title">
+            Recent posts
+          </h2>
           <div className="posts">
             {posts &&
               posts
@@ -58,7 +63,7 @@ function Home() {
         </div>
 
         {/* Right Column */}
-        <div className="col-md-3 right-column">
+        <div className="col-md-2 right-column">
           <h3>Popular locations:</h3>
           <ul className="list-group">
             <li className="list-group-item">Gmach Chemii (54)</li>

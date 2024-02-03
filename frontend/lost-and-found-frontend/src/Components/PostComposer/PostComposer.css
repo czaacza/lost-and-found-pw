@@ -10,9 +10,10 @@ p {
 .post-composer {
   border-radius: 10px;
   background-color: #f0f2f5;
-  padding: 20px; /* Increased padding for more space */
-  margin-bottom: 20px;
+  padding: 20px !important;
+  margin-bottom: 48px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
 }
 
 /* Adjust the profile picture to be at the top of the textarea */
