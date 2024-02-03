@@ -49,10 +49,12 @@ function Home() {
           <PostComposer postType={postType} />
           {/* Render posts based on the selected post type */}
           {/* IF POSTS EXIST AND IS ARRAY*/}
-          {posts &&
-            posts
-              .filter((post) => post.category === postType)
-              .map((post) => <Post key={post._id} post={post} />)}
+          <div className="posts">
+            {posts &&
+              posts
+                .filter((post) => post.category === postType)
+                .map((post) => <Post key={post._id} post={post} />)}
+          </div>
         </div>
 
         {/* Right Column */}

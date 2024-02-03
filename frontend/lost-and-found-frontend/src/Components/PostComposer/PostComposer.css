@@ -85,7 +85,7 @@ p {
   display: flex;
   align-items: center !important;
   justify-content: center;
-  background-color: #1877f2 !important;
+  background-color: #6a1515 !important;
   gap: 7px;
   color: #fefdfd !important;
   border: none !important;
@@ -94,6 +94,10 @@ p {
   padding: 8px 24px !important;
   white-space: nowrap; /* Prevent the text in the button from wrapping */
   font-weight: 400 !important;
+}
+
+.share-button:hover {
+  background-color: #4a0f0f !important;
 }
 
 .share-button p {

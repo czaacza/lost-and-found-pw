@@ -42,7 +42,10 @@ function PostComposer({ postType }) {
   };
 
   return (
-    <form className="post-composer container" onSubmit={handleSubmit}>
+    <form
+      className="post-composer container rounded-xl border p-4 shadow-md w-11/12 "
+      onSubmit={handleSubmit}
+    >
       <div className="row ">
         <div className="col-auto">
           <img src={profilePic} alt="Profile" className="profile-pic" />

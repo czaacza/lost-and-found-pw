@@ -43,7 +43,7 @@
 }
 
 .btn-sort {
-  background-color: #007bff !important;
+  background-color: #6a1515 !important;
   color: #fff !important;
   border-radius: 1000px !important;
   max-width: 200px;
@@ -59,7 +59,6 @@
 }
 
 .posts-column {
-  padding: 64px;
   padding-top: 0;
 }
 
@@ -91,4 +90,7 @@
   }
 }
 
+.posts {
+  margin-top: 60px;
+}
 /* Add additional media queries and styling for further responsiveness */
