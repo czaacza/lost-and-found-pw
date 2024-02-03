@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const crypto = require('crypto');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -22,13 +23,46 @@ const UserSchema = new mongoose.Schema(
       minLength: 3,
       trim: true,
     },
-    image: {
+    role: {
       type: String,
-      default:
-        'https://firebasestorage.googleapis.com/v0/b/budgettracker-a2e18.appspot.com/o/images%2Favatar.png?alt=media&token=23ca6f35-cad2-4af0-a159-f47ce083c2ef',
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
+    balance: {
+      type: Number,
+      required: true,
+      default: 10000, // Default balance of $10,000
+    },
+    resetPasswordToken: {
+      type: String,
+      required: false,
+    },
+    resetPasswordExpire: {
+      type: Date,
+      required: false,
+    },
+    failedLoginAttempts: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    loginAttemptExpiry: {
+      type: Date,
+      required: false,
     },
   },
   { timestamps: true }
 );
+
+UserSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+  return resetToken;
+};
 
 module.exports = mongoose.model('User', UserSchema);

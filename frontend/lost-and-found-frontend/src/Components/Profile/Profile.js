@@ -9,6 +9,7 @@ import UserInfo from './UserInfo/UserInfo';
 import { useGlobalContext } from '../../context/GlobalContext';
 import Post from '../Post/Post';
 import PostComposer from '../PostComposer/PostComposer';
+import avatar from '../../img/avatar-placeholder.png'; // Replace with the path to your profile picture
 
 const userProfileStyle = {
   display: 'flex',
@@ -31,11 +32,14 @@ function Profile() {
       <div className="header-menu-container">
         <div className="header-menu">
           <div style={userProfileStyle}>
-            <UserPhoto photo={user.image} />
-            <UserInfo label="Username" value={user.username} />
-            <UserInfo label="Email" value={user.email} />
+            <UserPhoto photo={user && user.image ? user.image : avatar} />
+            <UserInfo label="Username" value={user ? user.username : ''} />
+            <UserInfo label="Email" value={user ? user.email : ''} />
             {/* Masked for privacy */}
-            <UserInfo label="Date Joined" value={user.createdAt.slice(0, 10)} />
+            <UserInfo
+              label="Date Joined"
+              value={user ? user.createdAt.slice(0, 10) : ''}
+            />
           </div>
           <div>
             <PostComposer />

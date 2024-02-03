@@ -1,10 +1,15 @@
+const verifyToken = require('../middleware/authMiddleware');
+const requireRole = require('../middleware/roleMiddleware');
+
 const {
   login,
+  getUserProfile,
   addUser,
   getUser,
   getUsers,
   updateUser,
   deleteUser,
+  logout,
 } = require('../controllers/user');
 
 const {
@@ -18,14 +23,22 @@ const {
 
 const router = require('express').Router();
 
-router
-  .post('/users', addUser)
-  .get('/users', getUsers)
-  .delete('/users/:id', deleteUser)
-  .get('/users/:id', getUser)
-  .put('/users/:id', updateUser);
-
+// public access
+router.post('/users', addUser);
 router.post('/login', login);
+
+// logged in user access
+router.get('/users/:id', verifyToken, getUser);
+router.get('/user/profile', verifyToken, getUserProfile);
+router.post('/logout', verifyToken, logout);
+// router.post('/check-email', checkEmailExists);
+// router.post('/forgot-password', forgotPassword);
+// router.patch('/reset-password/:token', resetPassword);
+
+// only-admin access
+router.get('/users', verifyToken, requireRole('admin'), getUsers);
+router.delete('/users/:id', verifyToken, requireRole('admin'), deleteUser);
+router.put('/users/:id', verifyToken, requireRole('admin'), updateUser);
 
 router
   .post('/posts', addPost)

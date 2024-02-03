@@ -1,50 +1,55 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode'; // Make sure to npm install jwt-decode
 
 const AuthContext = createContext();
 const BASE_URL = 'http://localhost:3000/api/v1';
-// const BASE_URL = 'http://10.0.2.2:3000/api/v1';
-// const BASE_URL = 'http://192.168.1.27:3000/api/v1';
-// const BASE_URL = 'https://budget-tracker-backend-47a6.onrender.com/api/v1/';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const loadUserProfile = async () => {
+    try {
+      setLoading(true); // Start loading
+
+      const token = sessionStorage.getItem('userToken');
+      if (token) {
+        // Optional: Send token in Authorization header or as a cookie
+        const userResponse = await axios.get(`${BASE_URL}/user/profile`, {
+          withCredentials: true,
+          // headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(userResponse.data);
+        sessionStorage.setItem('user', JSON.stringify(userResponse.data));
+      }
+    } catch (error) {
+      console.error('Error loading user profile:', error);
+      sessionStorage.clear(); // Clear session storage on error
+    }
+    setLoading(false); // End loading
+  };
+
+  useEffect(() => {
+    loadUserProfile();
+  }, []);
 
   const handleLogin = async (username, password) => {
     try {
-      const userData = { username, password };
-      const response = await axios.post(`${BASE_URL}/login`, userData);
-
+      const response = await axios.post(
+        `${BASE_URL}/login`,
+        { username, password },
+        { withCredentials: true }
+      );
       if (response.status === 200 && response.data.token) {
-        const token = response.data.token;
-        localStorage.setItem('userToken', token);
-        console.log('token: ', token);
-        const decoded = jwtDecode(token); // Decode the token
-        console.log('decoded: ', decoded);
-
-        // get the user of decoded.id from the database
-        const newUser = await axios.get(`${BASE_URL}/users/${decoded.id}`);
-        console.log('newUser: ', newUser.data);
-
-        if (decoded.id) {
-          setUser({
-            id: decoded.id,
-            username: newUser.data.username,
-            email: newUser.data.email,
-            image: newUser.data.image,
-            createdAt: newUser.data.createdAt,
-          });
-        } else {
-          throw new Error('User ID not found in token');
-        }
+        sessionStorage.setItem('userToken', response.data.token); // Store the token
+        await loadUserProfile(); // Load and store user profile
       } else {
         throw new Error('Invalid credentials');
       }
     } catch (error) {
-      throw Error(
-        'Invalid credentials. Please try again or create a new account.'
-      );
+      console.error('Login error:', error);
+      throw error;
     }
   };
 
@@ -61,18 +66,30 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Something went wrong');
       }
     } catch (error) {
-      throw Error('Registration failed.');
+      throw new Error(error.message);
     }
   };
 
   const handleLogout = async () => {
-    localStorage.removeItem('userToken');
-    setUser(null);
+    try {
+      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+      sessionStorage.clear(); // Clear session storage on logout
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, handleLogin, handleLogout, handleRegister }}
+      value={{
+        user,
+        loading,
+        setUser,
+        handleLogin,
+        handleLogout,
+        handleRegister,
+      }}
     >
       {children}
     </AuthContext.Provider>
