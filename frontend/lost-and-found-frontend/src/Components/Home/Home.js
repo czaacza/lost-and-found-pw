@@ -3,9 +3,12 @@ import './Home.css';
 import Post from '../Post/Post';
 import PostComposer from '../PostComposer/PostComposer';
 import { useGlobalContext } from '../../context/GlobalContext';
+import SwitchButtons from './SwitchButtons/SwitchButtons';
+import { useAuth } from '../../context/AuthContext';
 
 function Home() {
   const [postType, setPostType] = useState('LOST'); // 'lost' or 'found'
+  const { user } = useAuth();
 
   // Dummy posts data array. Replace this with actual data.
   const { posts } = useGlobalContext();
@@ -29,7 +32,7 @@ function Home() {
         <div className="col-md-8 posts-column">
           {/* Switch buttons for Lost and Found */}
           <div className="switch-buttons">
-            <button
+            {/* <button
               type="button"
               className={`text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700}`}
               onClick={() => setPostType('LOST')}
@@ -43,12 +46,17 @@ function Home() {
               onClick={() => setPostType('FOUND')}
             >
               Found
-            </button>
+            </button> */}
+            <SwitchButtons postType={postType} setPostType={setPostType} />
           </div>
-          <h2 class="text-3xl font-extrabold dark:text-white">
-            Add a new post
-          </h2>
-          <PostComposer postType={postType} />
+          {user && (
+            <div>
+              <h2 class="text-3xl font-extrabold dark:text-white">
+                Add a new post
+              </h2>
+              <PostComposer postType={postType} setPostType={setPostType} />
+            </div>
+          )}
           {/* Render posts based on the selected post type */}
           {/* IF POSTS EXIST AND IS ARRAY*/}
           <h2 class="text-3xl font-extrabold dark:text-white  posts-title">

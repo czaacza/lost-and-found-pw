@@ -1,11 +1,9 @@
-/* Home.css */
-
 .home {
   padding-top: 20px;
 }
 
-.container {
-  max-width: none;
+.home {
+  max-width: 1800px !important;
 }
 
 .left-column {
@@ -14,19 +12,19 @@
 }
 
 .switch-buttons {
-  text-align: center; /* Center the buttons */
-  margin-bottom: 20px; /* Space between switch buttons and post composer */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.switch-btn {
-  margin: 0 10px; /* Spacing between buttons */
-  background-color: #f0f2f5; /* Background color */
-  color: #606770; /* Text color */
-  border: 1px solid #ced0d4; /* Border color */
-  border-radius: 20px; /* Rounded edges */
-  padding: 8px 20px; /* Padding inside buttons */
+/* .switch-btn {
+  margin: 0 10px;
+  background-color: #f0f2f5;
+  color: #606770;
+  border: 1px solid #ced0d4;
+  border-radius: 20px;
+  padding: 8px 20px;
   min-width: 100px;
-}
+} */
 
 .write-post-btn {
   width: 100%;
@@ -43,10 +41,21 @@
 }
 
 .btn-sort {
-  background-color: #6a1515 !important;
+  background-color: rgb(156 163 175) !important;
   color: #fff !important;
   border-radius: 1000px !important;
   max-width: 200px;
+  padding: 8px 20px !important;
+}
+
+.btn-sort:hover,
+.btn-sort:active {
+  background-color: rgb(128, 133, 143) !important;
+  color: #fff !important;
+}
+
+.icon-container {
+  margin-right: 6px !important;
 }
 
 .sort-section p {
@@ -60,7 +69,7 @@
 
 .posts-column {
   padding-top: 0;
-  padding: 0 6.4rem !important;
+  padding: 0 12.2rem !important;
 }
 
 .right-column {
@@ -78,7 +87,6 @@
   padding-left: 0;
 }
 
-/* Responsive adjustments */
 @media (max-width: 991.98px) {
   .left-column,
   .right-column {
@@ -92,12 +100,9 @@
 }
 
 .posts {
-  /* padding: 0 3.2rem; */
 }
 
 .posts-column h2 {
   margin-bottom: 20px !important;
   color: #333;
 }
-
-/* Add additional media queries and styling for further responsiveness */

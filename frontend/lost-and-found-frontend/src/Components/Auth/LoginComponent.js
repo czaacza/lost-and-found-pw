@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../img/lf-logo-pw.png';
+import logo from '../../img/lf-logo-pw-light.png';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 

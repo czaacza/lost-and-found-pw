@@ -10,7 +10,7 @@ p {
 .post-composer {
   border-radius: 10px;
   background-color: #f0f2f5;
-  padding: 20px !important;
+
   margin-bottom: 48px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -52,7 +52,7 @@ p {
   align-items: center;
   justify-content: space-between; /* This will put space between the action buttons and the share button */
   flex-wrap: wrap; /* Allows buttons to wrap to next line on small screens */
-  padding: 0 20px;
+  padding: 0;
 }
 
 .action-buttons {
@@ -119,4 +119,22 @@ p {
   .share-button {
     width: 100%; /* Full-width button on smaller screens */
   }
+}
+
+/* PHOTOS */
+.uploaded-photos .photo-wrapper {
+  width: 100%; /* Adjust if you want to change the size */
+  overflow: hidden;
+  position: relative;
+}
+.uploaded-photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures the images cover the area without losing aspect ratio */
+  /* add more styling like border-radius */
+  /* border-radius: 10px; */
+}
+
+.action {
+  transition: all 0.3s ease-in-out;
 }

@@ -15,7 +15,7 @@ const ProfileDropDown = (props) => {
   const navigate = useNavigate();
 
   const navigation = [
-    { title: 'Dashboard', path: 'javascript:void(0)' },
+    { title: 'Profile', path: '/profile' },
     { title: 'Settings', path: 'javascript:void(0)' },
   ];
 

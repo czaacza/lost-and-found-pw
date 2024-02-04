@@ -1,10 +1,11 @@
 // Post.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import './Post.css'; // Make sure to create a Post.css file for styling
 import profilePic from '../../img/avatar-placeholder.png';
 import boots from '../../img/boots.jpg';
 import avatar from '../../img/avatar-placeholder.png';
+import CommentSection from './CommentSection/CommentSection';
 
 function Post({ post }) {
   // Dummy data for the example, you would replace this with actual props or state
@@ -18,9 +19,25 @@ function Post({ post }) {
   };
 
   const comments = [
-    { author: 'John Doe', text: 'Buty bardzo ładne' },
-    { author: 'William Beck', text: 'Faktycznie widziałem cię w nich' },
+    {
+      username: 'adam222',
+      profilePic: avatar,
+      date: '2024-01-05',
+      content: 'Buty bardzo ładne',
+    },
+    {
+      username: 'William Beck',
+      profilePic: avatar,
+      date: '2024-01-10',
+      content: 'Faktycznie widziałem cię w nich',
+    },
   ];
+
+  const [showComments, setShowComments] = useState(false);
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
 
   return (
     <>
@@ -47,7 +64,12 @@ function Post({ post }) {
               <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
                 {postInfo.tags[0] ? postInfo.tags[0] : 'No tags'}
               </button>
-              <div className="text-xs text-neutral-500">2 hours ago</div>
+              <div className="text-xs text-neutral-500">
+                {/* if today, display the hour, if not today, display the date */}
+                {postInfo.date === new Date().toISOString().slice(0, 10)
+                  ? 'Today, ' + postInfo.time
+                  : postInfo.date}
+              </div>
             </div>
           </div>
           <div className="mt-4 mb-6">
@@ -56,10 +78,13 @@ function Post({ post }) {
               {postInfo.description ? postInfo.description : ''}
             </div>
           </div>
-          <div>
+          <div className="mb-3">
             <div className="flex items-center justify-between text-slate-500">
               <div className="flex space-x-4 md:space-x-8">
-                <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                <div
+                  className="flex cursor-pointer items-center transition hover:text-slate-600"
+                  onClick={toggleComments}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="mr-1.5 h-5 w-5"
@@ -74,7 +99,7 @@ function Post({ post }) {
                       d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                     />
                   </svg>
-                  <span>125</span>
+                  <span>{!comments ? '0' : comments.length}</span>
                 </div>
                 <div className="flex cursor-pointer items-center transition hover:text-slate-600">
                   <svg
@@ -96,6 +121,7 @@ function Post({ post }) {
               </div>
             </div>
           </div>
+          {showComments && <CommentSection comments={comments} />}
         </div>
       </div>
     </>

@@ -7,7 +7,6 @@ import Home from './Components/Home/Home';
 import Map from './Components/Map/Map';
 import Profile from './Components/Profile/Profile';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import LoginRegisterPopup from './Components/LoginRegisterPopup/LoginRegisterPopup';
 import { GlobalProvider } from './context/GlobalContext';
 import NavbarComponent from './Components/NavbarComponent/NavbarComponent';
 
