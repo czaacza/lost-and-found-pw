@@ -6,7 +6,7 @@ A streamlined platform for students to report and retrieve lost items on campus.
 
 1. Poproś Mateusza Czarneckiego o plik .env
 2. Pobierz repo za pomocą `git clone https://github.com/czaacza/lost-and-found-pw`
-3. cd lost-and-found-pw/backend-node (TUTAJ ZNAJDUJE SIĘ BACKEND APLIAKCJI)
+3. cd lost-and-found-pw/backend (TUTAJ ZNAJDUJE SIĘ BACKEND APLIAKCJI)
 4. Wrzuć tutaj plik .env
 5. npm install
 6. npm start
