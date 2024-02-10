@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .btn-sort {
@@ -69,7 +70,7 @@
 
 .posts-column {
   padding-top: 0;
-  padding: 0 12.2rem !important;
+  padding: 0 16rem !important;
 }
 
 .right-column {
@@ -100,6 +101,7 @@
 }
 
 .posts {
+  margin-top: 80px !important;
 }
 
 .posts-column h2 {

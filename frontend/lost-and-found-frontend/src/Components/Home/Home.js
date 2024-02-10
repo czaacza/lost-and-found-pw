@@ -51,17 +51,17 @@ function Home() {
           </div>
           {user && (
             <div>
-              <h2 class="text-3xl font-extrabold dark:text-white">
+              {/* <h2 class="text-3xl font-extrabold dark:text-white">
                 Add a new post
-              </h2>
+              </h2> */}
               <PostComposer postType={postType} setPostType={setPostType} />
             </div>
           )}
           {/* Render posts based on the selected post type */}
           {/* IF POSTS EXIST AND IS ARRAY*/}
-          <h2 class="text-3xl font-extrabold dark:text-white  posts-title">
+          {/* <h2 class="text-3xl font-extrabold dark:text-white  posts-title">
             Recent posts
-          </h2>
+          </h2> */}
           <div className="posts">
             {posts &&
               posts

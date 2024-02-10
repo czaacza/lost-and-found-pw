@@ -1,8 +1,6 @@
 const PostSchema = require('../models/PostModel');
 
 exports.addPost = async (req, res) => {
-  console.log('addPost req.body', req.body);
-
   try {
     const { userId, text, date, category, photos, tags } = req.body;
     const post = new PostSchema({
