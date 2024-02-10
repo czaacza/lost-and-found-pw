@@ -1,0 +1,17 @@
+.leaflet-container {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.map-container {
+  height: 100vh;
+  width: 100vw;
+  padding: 64px 240px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}

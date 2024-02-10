@@ -1,0 +1,12 @@
+.map-chooser {
+  height: 300px;
+  width: 580px;
+}
+
+.map-chooser-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

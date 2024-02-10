@@ -1,0 +1,17 @@
+.comment-composer {
+  padding: 1rem 1rem !important;
+  padding-bottom: 0 !important;
+}
+
+.comment-composer-input {
+  background-color: rgb(229 231 235) !important;
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  height: 25px !important;
+}
+
+.comment-composer-button-row {
+  display: flex;
+  justify-content: flex-end;
+}
