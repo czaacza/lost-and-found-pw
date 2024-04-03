@@ -6,35 +6,16 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import './Map.css';
 import { Icon } from 'leaflet';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 function Map() {
   const position = [52.220558592308336, 21.00985851319848];
 
-  const markers = [
-    {
-      id: 1,
-      position: [52.220558592308336, 21.00985],
-      title: 'Zgubione kluczyki',
-      description: '',
-    },
-    {
-      id: 2,
-      position: [52.220958592308336, 21.008],
-      title: 'Telefon Iphone 14',
-      description: '',
-    },
-    {
-      id: 3,
-      position: [52.222658592308336, 21.009],
-      title: 'Buty sportowe',
-      description: '',
-    },
-  ];
+  const { posts } = useGlobalContext();
 
   const customIcon = new Icon({
     iconUrl: require('../../img/geo-icon.png'),
     iconSize: [32, 32],
-    // iconAnchor: [12.5, 41],
   });
 
   return (
@@ -47,16 +28,31 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {markers &&
-          markers.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={marker.position}
-              icon={customIcon}
-            >
-              <Popup>{marker.title}</Popup>
-            </Marker>
-          ))}
+        {posts &&
+          posts.map(
+            (post) =>
+              post.title &&
+              post.location &&
+              post.location.coordinates &&
+              post.location.coordinates[0] &&
+              post.location.coordinates[1] && (
+                <Marker
+                  key={post._id}
+                  position={post.location.coordinates}
+                  icon={customIcon}
+                >
+                  <Popup>
+                    <div className="popup-container">
+                      <h3 className="text-sm font-bold">
+                        {post.category === 'LOST' ? 'Lost' : 'Found'}{' '}
+                        {post.title}
+                      </h3>
+                      <p>By {post.userId.username}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+              )
+          )}
       </MapContainer>
     </div>
   );

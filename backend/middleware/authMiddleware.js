@@ -4,6 +4,8 @@ const User = require('../models/UserModel'); // Ensure this path is correct
 const verifyToken = async (req, res, next) => {
   const token = req.cookies.token;
 
+  console.log('token', token);
+
   if (!token) {
     return res.status(403).send('A token is required for authentication');
   }
@@ -16,7 +18,7 @@ const verifyToken = async (req, res, next) => {
       return res.status(401).send('Invalid Token');
     }
 
-    req.user = user; // Now req.user contains the full user object, including the role
+    req.user = user;
     next();
   } catch (err) {
     return res.status(401).send('Invalid Token');

@@ -12,8 +12,6 @@ const PEPPER = process.env.PEPPER;
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log('Logging in user: ', username);
-    console.log('Password: ', '1234');
 
     if (!validateUsername(username)) {
       return res
