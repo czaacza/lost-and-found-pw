@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const CommentSchema = require('./CommentModel');
 
 const PostSchema = new mongoose.Schema(
   {
@@ -6,6 +7,13 @@ const PostSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      maxLength: 50,
+      trim: true,
+      default: 'item',
     },
     text: {
       type: String,
@@ -36,8 +44,19 @@ const PostSchema = new mongoose.Schema(
       default: [],
     },
     comments: {
-      type: Array,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
       default: [],
+    },
+    location: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: false,
+      },
+      coordinates: {
+        type: [Number],
+        required: false,
+      },
     },
   },
   { timestamps: true }

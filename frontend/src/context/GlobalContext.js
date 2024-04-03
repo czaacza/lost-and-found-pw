@@ -44,10 +44,13 @@ export const GlobalProvider = ({ children }) => {
   const addPost = async (postToAdd) => {
     try {
       console.log('postToAdd: ', postToAdd);
-      const response = await axios.post(`${BASE_URL}/posts`, postToAdd);
-      console.log('response: ', response);
-      getPosts();
-      console.log('post added');
+      const token = sessionStorage.getItem('userToken');
+      if (token) {
+        const response = await axios.post(`${BASE_URL}/posts`, postToAdd);
+        console.log('response: ', response);
+        getPosts();
+        console.log('post added');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +93,26 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const addComment = async (commentToAdd) => {
+    try {
+      console.log('ADD COMMENT, COMMENT TO ADD:', commentToAdd);
+      const token = sessionStorage.getItem('userToken');
+
+      if (token) {
+        const response = await axios.post(
+          `${BASE_URL}/comments`,
+          commentToAdd,
+          { withCredentials: true }
+        );
+        console.log('response: ', response);
+
+        getPosts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -100,6 +123,7 @@ export const GlobalProvider = ({ children }) => {
         addPost,
         deletePost,
         updatePost,
+        addComment,
       }}
     >
       {children}

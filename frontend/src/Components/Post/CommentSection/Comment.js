@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReply, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../context/AuthContext';
+import avatar from '../../../img/avatar-placeholder.png';
 
 const Comment = ({ username, profilePic, date, content, onReply }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -32,7 +33,7 @@ const Comment = ({ username, profilePic, date, content, onReply }) => {
     <div className="p-2 pd-0 rounded-lg relative">
       <div className="flex items-start space-x-3">
         <img
-          src={profilePic}
+          src={profilePic ? profilePic : avatar}
           alt={`${username}'s profile pic`}
           className="w-8 h-8 rounded-full object-cover mt-1"
         />

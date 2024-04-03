@@ -2,14 +2,17 @@ const PostSchema = require('../models/PostModel');
 
 exports.addPost = async (req, res) => {
   try {
-    const { userId, text, date, category, photos, tags } = req.body;
+    const { userId, text, title, date, category, photos, tags, location } =
+      req.body;
     const post = new PostSchema({
       userId,
+      title,
       text,
       date,
       category,
       photos,
       tags,
+      location,
     });
     if (!text) {
       return res.status(400).json({ message: 'Post cannot be empty' });
@@ -31,7 +34,15 @@ exports.getPosts = async (req, res) => {
   try {
     const posts = await PostSchema.find()
       .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      })
       .sort({ createdAt: -1 });
+
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });

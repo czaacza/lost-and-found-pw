@@ -72,7 +72,9 @@ const LoginComponent = () => {
             Sign in
           </button>
         </form>
-        {/* Continue with Google and Sign up link */}
+        <button className="w-full px-4 py-2 text-[#1c1c1c] font-medium bg-gray-100 hover:bg-gray-300 active:bg-gray-300 rounded-full duration-150 border-2 border-gray-600">
+          Sign in using USOS
+        </button>
       </div>
     </main>
   );

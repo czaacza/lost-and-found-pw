@@ -1,5 +1,5 @@
 .comment-composer {
-  padding: 1rem 1rem !important;
+  padding: 1rem 0.5rem !important;
   padding-bottom: 0 !important;
 }
 
@@ -9,6 +9,7 @@
   border: none;
   font-size: 14px;
   height: 25px !important;
+  border: none !important;
 }
 
 .comment-composer-button-row {
