@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import profilePic from '../../../img/avatar-placeholder.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,14 +9,39 @@ import {
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import './CommentComposer.css';
+import { useGlobalContext } from '../../../context/GlobalContext';
+import { useAuth } from '../../../context/AuthContext';
 
-const CommentComposer = ({ isSmall }) => {
-  const [comment, setComment] = useState('');
-
+const CommentComposer = ({ isSmall, postId }) => {
+  const { user } = useAuth();
+  const { addComment } = useGlobalContext();
   const [text, setText] = useState('');
+
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current && !isSmall) {
+      textareaRef.current.focus({ preventScroll: true });
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (text) {
+      const commentToAdd = {
+        userId: user._id,
+        postId: postId,
+        text: text,
+        date: new Date().toISOString(),
+        likes: [],
+      };
+      try {
+        await addComment(commentToAdd);
+        setText('');
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -32,9 +57,10 @@ const CommentComposer = ({ isSmall }) => {
           </div>
           <div className="col input-container bg-gray-200 rounded-xl p-3 pt-2">
             <textarea
+              ref={textareaRef}
               className="form-control input-field comment-composer-input bg-gray-200 rounded-md"
               placeholder="Write a comment..."
-              rows="3" // Starts with 3 rows, but you can change this number
+              rows="3"
               value={text}
               onChange={(e) => setText(e.target.value)}
             ></textarea>

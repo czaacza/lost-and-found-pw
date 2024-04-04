@@ -49,8 +49,6 @@ input {
 }
 
 button {
-  border: none !important;
-  outline: none !important;
   cursor: pointer !important;
 }
 

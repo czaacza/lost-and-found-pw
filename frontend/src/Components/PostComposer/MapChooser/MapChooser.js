@@ -1,15 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import './MapChooser.css';
 import {
   MapContainer,
   TileLayer,
-  useMap,
   Marker,
   useMapEvents,
   Popup,
 } from 'react-leaflet';
 import L from 'leaflet';
-import { Icon } from 'leaflet';
 
 const icon = L.icon({
   iconSize: [25, 41],

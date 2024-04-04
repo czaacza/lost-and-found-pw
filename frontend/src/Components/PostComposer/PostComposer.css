@@ -11,9 +11,33 @@ p {
   border-radius: 10px;
   background-color: #f0f2f5;
 
-  margin-bottom: 48px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
+}
+
+.header-container {
+  transform: translateX(5%);
+}
+
+.header-title {
+  display: inline-block;
+  /* move to the right */
+}
+
+.item-name-input {
+  border: 1px solid #ced0d4;
+  background-color: #f0f2f5;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 16px;
+  outline: none;
+  width: auto;
+  max-width: 100px;
+  padding: 5px 0;
+}
+
+.item-name-input::placeholder {
+  color: #a5a5a5;
 }
 
 /* Adjust the profile picture to be at the top of the textarea */

@@ -14,7 +14,6 @@ import { useAuth } from '../../context/AuthContext';
 import { useGlobalContext } from '../../context/GlobalContext';
 import FileUpload from './FileUpload/FileUpload';
 import MapChooser from './MapChooser/MapChooser';
-import L from 'leaflet';
 
 function PostComposer({ postType, setPostType }) {
   const { user } = useAuth();
@@ -23,14 +22,15 @@ function PostComposer({ postType, setPostType }) {
   const [text, setText] = useState('');
   const [photos, setPhotos] = useState([]);
   const [tags, setTags] = useState([]);
-  const [location, setLocation] = useState([null, null]);
+  const [location, setLocation] = useState(null);
   const [locationName, setLocationName] = useState('');
+  const [title, setTitle] = useState('item');
 
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showLocation, setShowLocation] = useState(false);
 
   useEffect(() => {
-    if (location[0] && location[1]) {
+    if (location && location[0] && location[1]) {
       // Use OpenStreetMap Nominatim for reverse geocoding
       const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${location[0]}&lon=${location[1]}`;
 
@@ -68,6 +68,7 @@ function PostComposer({ postType, setPostType }) {
   const handleAddPost = async () => {
     const postToAdd = {
       userId: user._id,
+      title,
       text,
       date: new Date(),
       category: postType,
@@ -75,6 +76,12 @@ function PostComposer({ postType, setPostType }) {
       tags,
       likes: [],
       comments: [],
+      location: location
+        ? {
+            type: 'Point',
+            coordinates: location,
+          }
+        : null,
     };
     await addPost(postToAdd);
   };
@@ -85,7 +92,7 @@ function PostComposer({ postType, setPostType }) {
     setText('');
     setPhotos([]);
     setTags([]);
-    setLocation([null, null]);
+    setLocation(null);
     setLocationName('');
     // clear the FileUpload
     setShowFileUpload(false);
@@ -94,15 +101,24 @@ function PostComposer({ postType, setPostType }) {
   return (
     <div className="post-composer container rounded-xl border p-4 pt-3 shadow-md w-10/12">
       {/* One Button, changes the text to Lost/Found when clicked and changes setPostType  */}
-      <p className="mb-2 text-center font-bold text-gray-800 dark:text-white">
-        {/* clickeable span which changes after click  with cursor pointer*/}I
-        <span
-          className="ml-1 text-[#6a1515] cursor-pointer underline"
-          onClick={() => setPostType(postType === 'LOST' ? 'FOUND' : 'LOST')}
-        >
-          {postType === 'LOST' ? 'lost' : 'found'}
-        </span>
-      </p>
+      <div className="mb-2 text-center font-bold text-gray-800 dark:text-white header-container">
+        <div className="header-title">
+          I
+          <span
+            className="mx-1 text-[#6a1515] cursor-pointer underline header-span"
+            onClick={() => setPostType(postType === 'LOST' ? 'FOUND' : 'LOST')}
+          >
+            {postType === 'LOST' ? 'lost' : 'found'}
+          </span>
+        </div>
+        <input
+          type="text"
+          placeholder="item"
+          className="item-name-input ml-1 text-sm bg-gray-50 dark:bg-gray-800 dark:text-white"
+          aria-label="Item name"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
 
       <form className="" onSubmit={handleSubmit}>
         <div className="row ">
