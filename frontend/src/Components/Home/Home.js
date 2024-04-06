@@ -11,19 +11,38 @@ function Home() {
   const { user } = useAuth();
 
   // Dummy posts data array. Replace this with actual data.
-  const { posts } = useGlobalContext();
+  const { posts, getPosts } = useGlobalContext();
+
+  const sortPosts = (sortOrder) => {
+    getPosts(sortOrder);
+  };
 
   return (
-    <div className="container home ">
+    <div className="container home">
       <div className="row">
         {/* Left Column */}
         <div className="col-md-2 left-column">
           <div className="sort-section">
-            <p>Sort with:</p>
+            <p className="text-center text-lg font-normal	">Sort with</p>
             <div className="buttons-row">
-              <button className="btn btn-sort">Newest</button>
-              <button className="btn btn-sort">Oldest</button>
-              <button className="btn btn-sort">Most comments</button>
+              <button
+                className="btn btn-sort"
+                onClick={() => sortPosts('newest')}
+              >
+                Newest
+              </button>
+              <button
+                className="btn btn-sort"
+                onClick={() => sortPosts('oldest')}
+              >
+                Oldest
+              </button>
+              <button
+                className="btn btn-sort"
+                onClick={() => sortPosts('most-comments')}
+              >
+                Most comments
+              </button>
             </div>
           </div>
         </div>
