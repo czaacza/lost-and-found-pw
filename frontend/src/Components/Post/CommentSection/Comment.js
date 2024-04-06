@@ -3,11 +3,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReply, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../context/AuthContext';
 import avatar from '../../../img/avatar-placeholder.png';
+import { useGlobalContext } from '../../../context/GlobalContext';
 
-const Comment = ({ username, profilePic, date, content, onReply }) => {
+const Comment = ({
+  id,
+  username,
+  profilePic,
+  date,
+  content,
+  onReply,
+  onRemove,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useAuth();
+  const { removeComment } = useGlobalContext();
+
+  const handleRemove = async () => {
+    try {
+      await removeComment(id);
+      onRemove(id); // Call the passed function to filter out this comment from the parent component's state
+    } catch (error) {
+      console.error('Error removing comment:', error);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -62,8 +81,12 @@ const Comment = ({ username, profilePic, date, content, onReply }) => {
               className="absolute right-4 top-4 w-24 bg-white rounded-md shadow-lg z-10"
             >
               <ul className="text-gray-700 text-sm">
-                <li className="hover:bg-gray-100 p-2 cursor-pointer">Edit</li>
-                <li className="hover:bg-gray-100 p-2 cursor-pointer">Remove</li>
+                <li
+                  className="hover:bg-gray-100 p-2 cursor-pointer"
+                  onClick={handleRemove}
+                >
+                  Remove
+                </li>
               </ul>
             </div>
           )}

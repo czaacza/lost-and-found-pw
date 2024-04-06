@@ -13,6 +13,7 @@ import NavbarComponent from './Components/NavbarComponent/NavbarComponent';
 import './App.css';
 import RegisterComponent from './Components/Auth/RegisterComponent';
 import LoginComponent from './Components/Auth/LoginComponent';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   const AppContent = () => {
@@ -38,6 +39,7 @@ function App() {
         <BrowserRouter>
           <NavbarComponent />
           <AppContent />
+          <Footer />
         </BrowserRouter>
       </GlobalProvider>
     </AuthProvider>
