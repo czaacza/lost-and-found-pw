@@ -17,7 +17,7 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      getPostsByUser(user.id);
+      getPostsByUser(user._id);
     }
   }, [user]);
 
