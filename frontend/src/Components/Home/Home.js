@@ -5,8 +5,10 @@ import PostComposer from '../PostComposer/PostComposer';
 import { useGlobalContext } from '../../context/GlobalContext';
 import SwitchButtons from './SwitchButtons/SwitchButtons';
 import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from "react-i18next";
 
 function Home() {
+  const { t } = useTranslation();
   const [postType, setPostType] = useState('LOST'); // 'lost' or 'found'
   const { user } = useAuth();
 
@@ -19,11 +21,11 @@ function Home() {
         {/* Left Column */}
         <div className="col-md-2 left-column">
           <div className="sort-section">
-            <p>Sort with:</p>
+            <p>{t('Sort with')}:</p>
             <div className="buttons-row">
-              <button className="btn btn-sort">Newest</button>
-              <button className="btn btn-sort">Oldest</button>
-              <button className="btn btn-sort">Most comments</button>
+              <button className="btn btn-sort">{t('Newest')}</button>
+              <button className="btn btn-sort">{t('Oldest')}</button>
+              <button className="btn btn-sort">{t('Most comments')}</button>
             </div>
           </div>
         </div>
@@ -49,11 +51,11 @@ function Home() {
 
         {/* Right Column */}
         <div className="col-md-2 right-column">
-          <h3>Popular locations:</h3>
+          <h3>{t('Popular locations')}:</h3>
           <ul className="list-group">
-            <li className="list-group-item">Gmach Chemii (54)</li>
-            <li className="list-group-item">Gmach Fizyki (37)</li>
-            <li className="list-group-item">Gmach MiNI (16)</li>
+            <li className="list-group-item">{t('Chemistry Building')} (54)</li>
+            <li className="list-group-item">{t('Physics Building')} (37)</li>
+            <li className="list-group-item">{t('MiNi Building')} (16)</li>
           </ul>
         </div>
       </div>

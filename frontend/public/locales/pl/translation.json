@@ -1,0 +1,63 @@
+{
+    "Home": "Strona Główna",
+    "Map": "Mapa",
+    "Profile": "Profil",
+    "Change language": "Zmień język",
+    "English": "Angielski",
+    "Polish": "Polski",
+    "Settings": "Ustawienia",
+    "Log in": "Zaloguj",
+    "Log out": "Wyloguj",
+    "Sign up": "Zarejestruj",
+
+    "Sort with": "Sortuj według",
+    "Newest": "Najnowsze",
+    "Most comments": "Najwięcej komentarzy",
+    
+    "Lost": "Zgubione",
+    "Found": "Znalezione",
+
+    "I": "",
+    "lost": "Zgubiłem",
+    "found": "Znalazłem",
+    "item": "przedmiot",
+    "Please describe the item you lost or found...": "Opisz zgubiony lub znaleziony przedmiot...",
+    "Photo or Video": "Zdjęcie lub Film",
+    "Tag": "Znacznik",
+    "Location": "Lokalizacja",
+    "Your lost item estimated location": "Przybliżona lokalizacja zgubionego przedmiotu",
+    "Post": "Zapostuj",
+    "No tags": "Brak tagów",
+    "Today": "Dziś",
+    "Write a comment...": "Napisz komentarz...",
+    "Comment": "Skomentuj",
+    "Edit": "Edytuj",
+    "Remove": "Usuń",
+    "Reply": "Odpowiedz",
+    
+    "Popular locations": "Popularne lokalizacje",
+    "Chemistry Building": "Gmach Chemii",
+    "Physics Building": "Gmach Fizyki",
+    "MiNi Building": "Gmach MiNi",
+
+    "Recently lost items": "Ostatnio zgubione przedmioty",
+    "By": "Przez",
+
+    "Log in to your account": "Zaloguj się do konta",
+    "Username": "Nazwa użytkownika",
+    "Password": "Hasło",
+    "Forgot password?": "Zapomniałeś hasła?",
+    "Sign in": "Zaloguj się",
+    "Sign in using USOS": "Zaloguj się poprzez USOS",
+
+    "Create an account": "Stwórz konto",
+    "Already have an account?": "Posiadasz już konto?",
+    "Name": "Nazwa",
+    "Email": "E-mail",
+    "Create account": "Stwórz konto",
+
+    "Date Joined": "Data dołączenia:",
+    "Choose item location": "Wybierz lokalizację przedmiotu",
+    "Estimated location:": "Przybliżona lokalizacja:",
+    "Your Posts:": "Twoje Posty:"
+}

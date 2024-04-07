@@ -4,9 +4,13 @@ import logo from '../../img/lf-logo-pw.png'; // Replace with the actual path to 
 import './NavbarComponent.css';
 import avatar from '../../img/avatar-placeholder.png';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
+import enFlag from '../../img/flags/uk-flag.png';
+import plFlag from '../../img/flags/pl-flag.png';
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [menuState, setMenuState] = useState(false);
 
@@ -15,8 +19,8 @@ const ProfileDropDown = (props) => {
   const navigate = useNavigate();
 
   const navigation = [
-    { title: 'Profile', path: '/profile' },
-    { title: 'Settings', path: 'javascript:void(0)' },
+    { title: t('Profile'), path: '/profile' },
+    { title: t('Settings'), path: 'javascript:void(0)' },
   ];
 
   const handleSubmitLogout = () => {
@@ -72,7 +76,7 @@ const ProfileDropDown = (props) => {
               onClick={handleSubmitLogout}
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              Log out
+              {t('Log out')}
             </button>
           </li>
         </ul>
@@ -81,20 +85,73 @@ const ProfileDropDown = (props) => {
   );
 };
 
+const LanguageSwitcher = () => {
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState("en");
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  const changeLanguage = (lng) => {
+    console.log(`Zmiana języka na: ${lng}`);
+    i18n.changeLanguage(lng);
+    setIsOpen(false);
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={toggleDropdown}
+        className="text-gray-700 hover:text-gray-900"
+      >
+        {t('Change language')}
+      </button>
+      {isOpen && (
+        <div className="absolute right-0 bg-white mt-2 py-1 w-48 border rounded-md shadow-lg">
+          <div onClick={() => changeLanguage('en')} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+            <img src={enFlag} alt="English" className="w-6" />
+            {t('English')}
+          </div>
+          <div onClick={() => changeLanguage('pl')} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+            <img src={plFlag} alt="Polski" className="w-6" />
+            {t('Polish')}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const NavbarComponent = () => {
+  const [ t ] = useTranslation();
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: 'Home', path: '/' },
-    { title: 'Map', path: '/map' },
+    { title:  t('Home'), path: '/' },
+    { title: t('Map'), path: '/map' },
   ];
   return (
     <nav className="bg-white border-b">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
-          <a href="/">
+          <a href="/"> 
             <img src={logo} width={150} height={50} alt="logo" />
           </a>
         </div>
@@ -116,23 +173,24 @@ const NavbarComponent = () => {
               {user && !loading && (
                 <li className="text-gray-900 hover:text-gray-900 ">
                   <a href="/profile" className="font-normal">
-                    Profile
+                    {t('Profile')}
                   </a>
                 </li>
               )}
+              <LanguageSwitcher />
               {!user && !loading && (
                 <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                   <a
                     href="/login"
                     className="block text-gray-700 hover:text-gray-900"
                   >
-                    Log in
+                    {t('Log in')}
                   </a>
                   <a
                     href="/signup"
                     className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-[#6A1515] hover:bg-[#6A1515] active:bg-[#6A1515] rounded-full md:inline-flex"
                   >
-                    Sign up
+                    {t('Sign up')}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -149,7 +207,6 @@ const NavbarComponent = () => {
                 </div>
               )}
             </ul>
-
             {user && <ProfileDropDown class="mt-5 pt-5 border-t lg:hidden" />}
           </div>
           <div className="flex-1 flex items-center justify-end space-x-2 sm:space-x-6">

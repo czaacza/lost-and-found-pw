@@ -14,8 +14,10 @@ import { useAuth } from '../../context/AuthContext';
 import { useGlobalContext } from '../../context/GlobalContext';
 import FileUpload from './FileUpload/FileUpload';
 import MapChooser from './MapChooser/MapChooser';
+import { useTranslation } from "react-i18next";
 
 function PostComposer({ postType, setPostType }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { addPost } = useGlobalContext();
 
@@ -103,17 +105,17 @@ function PostComposer({ postType, setPostType }) {
       {/* One Button, changes the text to Lost/Found when clicked and changes setPostType  */}
       <div className="mb-2 text-center font-bold text-gray-800 dark:text-white header-container">
         <div className="header-title">
-          I
+          {t('I')}
           <span
             className="mx-1 text-[#6a1515] cursor-pointer underline header-span"
             onClick={() => setPostType(postType === 'LOST' ? 'FOUND' : 'LOST')}
           >
-            {postType === 'LOST' ? 'lost' : 'found'}
+            {postType === 'LOST' ? t('lost') : t('found')}
           </span>
         </div>
         <input
           type="text"
-          placeholder="item"
+          placeholder={t('item')}
           className="item-name-input ml-1 text-sm bg-gray-50 dark:bg-gray-800 dark:text-white"
           aria-label="Item name"
           onChange={(e) => setTitle(e.target.value)}
@@ -128,7 +130,7 @@ function PostComposer({ postType, setPostType }) {
           <div className="col input-container">
             <textarea
               className="form-control input-field bg-gray-50"
-              placeholder="Please describe the item you lost or found..."
+              placeholder={t('Please describe the item you lost or found...')}
               rows="3" // Starts with 3 rows, but you can change this number
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -143,24 +145,24 @@ function PostComposer({ postType, setPostType }) {
               onClick={() => setShowFileUpload(!showFileUpload)}
             >
               <FontAwesomeIcon icon={faImage} />{' '}
-              <p className="text-sm">Photo or Video</p>
+              <p className="text-sm">{t('Photo or Video')}</p>
             </div>
             <div className="action bg-gray-50 hover:bg-gray-300">
               <FontAwesomeIcon icon={faUserTag} />{' '}
-              <p className="text-sm">Tag</p>
+              <p className="text-sm">{t('Tag')}</p>
             </div>
             <div
               className="action bg-gray-50 hover:bg-gray-300"
               onClick={() => setShowLocation(!showLocation)}
             >
               <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
-              <p className="text-sm">Location</p>
+              <p className="text-sm">{t('Location')}</p>
             </div>
           </div>
           <div className="col-auto">
             <button type="submit" className="share-button">
               <FontAwesomeIcon icon={faPaperPlane} />
-              <p>Post</p>
+              <p>{t('Post')}</p>
             </button>
           </div>
         </div>
@@ -177,7 +179,7 @@ function PostComposer({ postType, setPostType }) {
         {locationName && (
           <div>
             <h5 className="mb-1 mt-3 text-md font-bold tracking-tight text-gray-900 dark:text-white">
-              Estimated location:
+              {t('Estimated location:')}
             </h5>
             <p>{locationName}</p>
           </div>

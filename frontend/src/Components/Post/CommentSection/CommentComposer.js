@@ -11,8 +11,10 @@ import {
 import './CommentComposer.css';
 import { useGlobalContext } from '../../../context/GlobalContext';
 import { useAuth } from '../../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const CommentComposer = ({ isSmall, postId }) => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { addComment } = useGlobalContext();
   const [text, setText] = useState('');
@@ -59,7 +61,7 @@ const CommentComposer = ({ isSmall, postId }) => {
             <textarea
               ref={textareaRef}
               className="form-control input-field comment-composer-input bg-gray-200 rounded-md"
-              placeholder="Write a comment..."
+              placeholder={t("Write a comment...")}
               rows="3"
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -68,7 +70,7 @@ const CommentComposer = ({ isSmall, postId }) => {
               <div className="comment-composer-button-row">
                 <button type="submit" className="share-button text-xs">
                   <FontAwesomeIcon icon={faPaperPlane} />
-                  <p>Comment</p>
+                  <p>{t('Comment')}</p>
                 </button>
               </div>
             )}
