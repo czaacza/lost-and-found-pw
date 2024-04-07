@@ -14,6 +14,7 @@ import './App.css';
 import RegisterComponent from './Components/Auth/RegisterComponent';
 import LoginComponent from './Components/Auth/LoginComponent';
 import Footer from './Components/Footer/Footer';
+import { DarkThemeToggle, Flowbite } from "flowbite-react";
 
 function App() {
   const AppContent = () => {
@@ -21,7 +22,7 @@ function App() {
 
     return (
       // add the containerCentered style if user is logged in
-      <div className="bg-gray-50">
+      <div className="bg-gray-50 dark:bg-neutral-900">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
@@ -34,15 +35,19 @@ function App() {
   };
 
   return (
+    <div className="dark">
     <AuthProvider>
-      <GlobalProvider>
+        <GlobalProvider>
         <BrowserRouter>
-          <NavbarComponent />
-          <AppContent />
-          <Footer />
+            <NavbarComponent />
+            
+            <AppContent />
+            
+            <Footer />
         </BrowserRouter>
-      </GlobalProvider>
+        </GlobalProvider>
     </AuthProvider>
+    </div>
   );
 }
 

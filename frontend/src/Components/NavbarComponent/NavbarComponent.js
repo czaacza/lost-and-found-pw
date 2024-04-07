@@ -91,7 +91,7 @@ const NavbarComponent = () => {
     { title: 'Map', path: '/map' },
   ];
   return (
-    <nav className="bg-white border-b">
+    <nav className="border-b dark:bg-neutral-800">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
           <a href="/">
@@ -100,7 +100,7 @@ const NavbarComponent = () => {
         </div>
         <div className="flex-1 flex items-center justify-between">
           <div
-            className={`bg-white absolute z-20 w-5/6 top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${
+            className={`bg-[#FFFFFF] dark:bg-neutral-800 absolute z-20 w-5/6 top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${
               menuState ? '' : 'hidden'
             }`}
           >
@@ -108,13 +108,13 @@ const NavbarComponent = () => {
               {navigation.map((item, idx) => (
                 <li
                   key={idx}
-                  className="text-gray-900 hover:text-gray-900 font-normal"
+                  className="text-gray-900 dark:text-neutral-50 hover:text-gray-900 font-normal"
                 >
                   <a href={item.path}>{item.title}</a>
                 </li>
               ))}
               {user && !loading && (
-                <li className="text-gray-900 hover:text-gray-900 ">
+                <li className="text-gray-900 dark:text-neutral-50 hover:text-gray-900 ">
                   <a href="/profile" className="font-normal">
                     Profile
                   </a>
@@ -124,13 +124,13 @@ const NavbarComponent = () => {
                 <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                   <a
                     href="/login"
-                    className="block text-gray-700 hover:text-gray-900"
+                    className="block text-gray-900 dark:text-neutral-50"
                   >
                     Log in
                   </a>
                   <a
                     href="/signup"
-                    className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-[#6A1515] hover:bg-[#6A1515] active:bg-[#6A1515] rounded-full md:inline-flex"
+                    className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-red-800 hover:bg-[#6A1515] active:bg-[#6A1515] rounded-full md:inline-flex"
                   >
                     Sign up
                     <svg

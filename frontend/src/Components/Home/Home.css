@@ -42,7 +42,7 @@
 }
 
 .btn-sort {
-  background-color: rgb(156 163 175) !important;
+  background-color: rgb(156 163 175);
   color: #fff !important;
   border-radius: 1000px !important;
   max-width: 200px;

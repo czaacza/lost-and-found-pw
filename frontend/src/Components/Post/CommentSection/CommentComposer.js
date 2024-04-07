@@ -55,10 +55,10 @@ const CommentComposer = ({ isSmall, postId }) => {
               className="w-8 h-8 rounded-full object-cover mt-1"
             />
           </div>
-          <div className="col input-container bg-gray-200 rounded-xl p-3 pt-2">
+          <div className="col input-container bg-gray-200 dark:bg-neutral-700 rounded-xl p-3 pt-2">
             <textarea
               ref={textareaRef}
-              className="form-control input-field comment-composer-input bg-gray-200 rounded-md"
+              className="form-control input-field comment-composer-input bg-gray-200 dark:bg-neutral-700 rounded-md"
               placeholder="Write a comment..."
               rows="3"
               value={text}

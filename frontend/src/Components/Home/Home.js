@@ -21,24 +21,24 @@ function Home() {
     <div className="container home">
       <div className="row">
         {/* Left Column */}
-        <div className="col-md-2 left-column">
+        <div className="col-md-2 left-column dark:text-neutral-50">
           <div className="sort-section">
             <p className="text-center text-lg font-normal	">Sort with</p>
             <div className="buttons-row">
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('newest')}
               >
                 Newest
               </button>
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('oldest')}
               >
                 Oldest
               </button>
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('most-comments')}
               >
                 Most comments
@@ -67,12 +67,12 @@ function Home() {
         </div>
 
         {/* Right Column */}
-        <div className="col-md-2 right-column">
+        <div className="col-md-2 right-column dark:text-neutral-400">
           <h3>Popular locations:</h3>
           <ul className="list-group">
-            <li className="list-group-item">Gmach Chemii (54)</li>
-            <li className="list-group-item">Gmach Fizyki (37)</li>
-            <li className="list-group-item">Gmach MiNI (16)</li>
+            <li className="list-group-item dark:text-neutral-50">Gmach Chemii (54)</li>
+            <li className="list-group-item dark:text-neutral-50">Gmach Fizyki (37)</li>
+            <li className="list-group-item dark:text-neutral-50">Gmach MiNI (16)</li>
           </ul>
         </div>
       </div>

@@ -72,3 +72,7 @@
 .comment-input {
   margin-top: 1rem;
 }
+
+.separator {
+  border-color: #404040 !important;
+}

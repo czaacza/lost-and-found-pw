@@ -60,8 +60,8 @@ function Post({ post }) {
       {/* This is an example component */}
       <div className="flex items-center justify-center mb-5">
         {' '}
-        <div className="rounded-xl border p-4 shadow-md w-full bg-white">
-          <div className="flex w-full items-center justify-between border-b pb-3">
+        <div className="rounded-xl border p-4 shadow-md w-full bg-[#FFFFFF] dark:bg-neutral-800 dark:border-none">
+          <div className="flex w-full items-center justify-between border-b dark:border-neutral-700 pb-3">
             <div className="flex items-center space-x-3">
               <div
                 className="h-8 w-8 rounded-full bg-slate-400"
@@ -71,16 +71,16 @@ function Post({ post }) {
                   backgroundPosition: 'center',
                 }}
               />{' '}
-              <div className="text-lg font-bold text-slate-700">
+              <div className="text-lg font-bold text-slate-700 dark:text-slate-300">
                 {' '}
                 {postInfo.author}{' '}
               </div>
             </div>
             <div className="flex items-center space-x-8">
-              <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
+              <button className="rounded-2xl border bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-50 px-3 py-1 text-xs font-semibold dark:border-neutral-900">
                 {postInfo.tags[0] ? postInfo.tags[0] : 'No tags'}
               </button>
-              <div className="text-xs text-neutral-500">
+              <div className="text-xs text-neutral-500 dark:text-neutral-400">
                 {/* if today, display the hour, if not today, display the date */}
                 {postInfo.date === new Date().toISOString().slice(0, 10)
                   ? 'Today, ' + postInfo.time
@@ -92,7 +92,7 @@ function Post({ post }) {
             <div className="mb-3 font-bold text-center text-gray-500 text-sm width-full">
               {post.category === 'LOST' ? 'Lost' : 'Found'} {post.title}
             </div>
-            <div className="text-neutral-600 px-2 text-md">
+            <div className="text-neutral-600 dark:text-neutral-50 px-2 text-md">
               {postInfo.description ? postInfo.description : ''}
             </div>
           </div>

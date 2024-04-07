@@ -19,7 +19,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
         <input type="checkbox" className="sr-only" checked={isFoundChecked} />
         <span
           className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${
-            !isFoundChecked ? 'text-neutral-600 bg-gray-200' : 'text-body-color'
+            !isFoundChecked ? 'text-neutral-600 bg-gray-200 dark:text-neutral-50 dark:bg-gray-600' : 'text-body-color dark:text-slate-700'
           }`}
           onClick={() => setPostType('LOST')}
         >
@@ -30,7 +30,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
         </span>
         <span
           className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${
-            isFoundChecked ? 'text-neutral-600 bg-gray-200' : 'text-body-color'
+            isFoundChecked ? 'text-neutral-600 bg-gray-200 dark:text-neutral-50 dark:bg-gray-600' : 'text-body-color dark:text-slate-700'
           }`}
           onClick={() => setPostType('FOUND')}
         >

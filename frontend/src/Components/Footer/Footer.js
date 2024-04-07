@@ -3,7 +3,7 @@ import logo from '../../img/lf-logo-pw.png';
 
 const Footer = () => {
   return (
-    <footer className="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+    <footer className="p-4 md:p-8 lg:p-10 dark:bg-neutral-800">
       <div className="mx-auto max-w-screen-xl text-center">
         <a
           href="/"
