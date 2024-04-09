@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaSearch, FaRegCheckCircle } from 'react-icons/fa';
+import { FaRegCheckCircle } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
 
 const SwitchButtons = ({ postType, setPostType }) => {
+  const { t } = useTranslation();
   const [isFoundChecked, setIsFoundChecked] = useState(false);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
           onClick={() => setPostType('LOST')}
         >
           <FaSearch className="icon-container fill-current" />
-          <span>Lost</span>
+          <span>{t('Lost')}</span>
         </div>
         {/* Button 2 */}
         <div
@@ -40,7 +43,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
           onClick={() => setPostType('FOUND')}
         >
           <FaRegCheckCircle className="icon-container fill-current" />
-          <span>Found</span>
+          <span>{t('Found')}</span>
         </div>
       </div>
     </label>

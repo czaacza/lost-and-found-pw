@@ -54,7 +54,7 @@ function Header() {
           <img className="university-name-logo" src={logo} alt="WUT logo" />
         </div>
       </nav>
-    </header>
+    </header>  
   );
 }
 

@@ -4,6 +4,9 @@ import { faReply, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../context/AuthContext';
 import avatar from '../../../img/avatar-placeholder.png';
 import { useGlobalContext } from '../../../context/GlobalContext';
+import { useTranslation } from 'react-i18next';
+
+const { t } = useTranslation();
 
 const Comment = ({
   id,
@@ -85,7 +88,7 @@ const Comment = ({
                   className="hover:bg-gray-100 p-2 cursor-pointer"
                   onClick={handleRemove}
                 >
-                  Remove
+                  {t('Remove')}
                 </li>
               </ul>
             </div>
@@ -96,7 +99,7 @@ const Comment = ({
             className="flex items-center text-blue-500 text-xs hover:underline"
           >
             <FontAwesomeIcon icon={faReply} className="text-xs mr-1" />
-            Reply
+            {t('Reply')}
           </button>
         </div>
       </div>

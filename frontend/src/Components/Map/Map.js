@@ -7,8 +7,10 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
 import { Icon } from 'leaflet';
 import { useGlobalContext } from '../../context/GlobalContext';
+import { useTranslation } from 'react-i18next';
 
 function Map() {
+  const { t } = useTranslation();
   const position = [52.220558592308336, 21.00985851319848];
 
   const { posts } = useGlobalContext();
@@ -26,7 +28,7 @@ function Map() {
   return (
     <div className="map-container">
       <div className="title-container">
-        <h3>Recently lost items</h3>
+        <h3>{t('Recently lost items')}</h3>
       </div>
       <MapContainer center={position} zoom={18}>
         <TileLayer
@@ -49,10 +51,10 @@ function Map() {
                   <Popup>
                     <div className="popup-container">
                       <h3 className="text-sm font-bold">
-                        {post.category === 'LOST' ? 'Lost' : 'Found'}{' '}
+                        {post.category === 'LOST' ? t('Lost') : t('Found')}{' '}
                         {post.title}
                       </h3>
-                      <p>By {post.userId.username}</p>
+                      <p>{t('By')} {post.userId.username}</p>
                     </div>
                   </Popup>
                 </Marker>

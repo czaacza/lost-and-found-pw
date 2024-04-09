@@ -20,6 +20,7 @@ import {
 import '../PostComposer/MapChooser/MapChooser.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import { useTranslation } from 'react-i18next';
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -30,6 +31,7 @@ const icon = L.icon({
 });
 
 function Post({ post }) {
+  const { t } = useTranslation();
   console.log(post.location.coordinates);
 
   // Dummy data for the example, you would replace this with actual props or state
@@ -79,19 +81,19 @@ function Post({ post }) {
             </div>
             <div className="flex items-center space-x-8">
               <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
-                {postInfo.tags[0] ? postInfo.tags[0] : 'No tags'}
+                {postInfo.tags[0] ? postInfo.tags[0] : t('No tags')}
               </button>
               <div className="text-xs text-neutral-500">
                 {/* if today, display the hour, if not today, display the date */}
                 {postInfo.date === new Date().toISOString().slice(0, 10)
-                  ? 'Today, ' + postInfo.time
+                  ? t('Today') + ', ' + postInfo.time
                   : postInfo.date}
               </div>
             </div>
           </div>
           <div className="mt-4 mb-6">
             <div className="mb-3 font-bold text-center text-gray-500 text-sm width-full">
-              {post.category === 'LOST' ? 'Lost' : 'Found'} {post.title}
+              {post.category === 'LOST' ? t('Lost') : t('Found')} {post.title}
             </div>
             <div className="text-neutral-600 px-2 text-md">
               {postInfo.description ? postInfo.description : ''}
@@ -153,7 +155,7 @@ function Post({ post }) {
                       {/* Fa Map icon */}
                       <FaSearchLocation className="mr-1.5 h-4 w-4" />
                       {/* <FaSearch className="mr-1.5 h-4 w-4" /> */}
-                      <span className="text-sm font-normal">Location</span>
+                      <span className="text-sm font-normal">{t('Location')}</span>
                     </div>
                   )}
               </div>
@@ -177,7 +179,7 @@ function Post({ post }) {
                   />
                   {post.location.coordinates && (
                     <Marker position={post.location.coordinates} icon={icon}>
-                      <Popup>Your lost item estimated location</Popup>
+                      <Popup>{t('Your lost item estimated location')}</Popup>
                     </Marker>
                   )}
                 </MapContainer>

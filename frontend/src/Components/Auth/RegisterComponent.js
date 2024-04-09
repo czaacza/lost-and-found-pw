@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; // Adjust the import path as necessary
 import logo from '../../img/lf-logo-pw-light.png'; // Adjust the import path for your logo
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const RegisterComponent = () => {
+  const { t } = useTranslation();
   const { handleRegister } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,15 +37,15 @@ const RegisterComponent = () => {
           <img src={logo} width={150} className="mx-auto" alt="Logo" />
           <div className="mt-5 space-y-2">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Create an account
+              {t('Create an account')}
             </h3>
             <p>
-              Already have an account?{' '}
+              {t('Already have an account?')}{' '}
               <a
                 href="/login" // Adjust the href to your login route
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                Log in
+                {t('Log in')}
               </a>
             </p>
           </div>
@@ -53,7 +55,7 @@ const RegisterComponent = () => {
         <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="font-medium">Name</label>
+              <label className="font-medium">{t('Name')}</label>
               <input
                 type="text"
                 required
@@ -63,7 +65,7 @@ const RegisterComponent = () => {
               />
             </div>
             <div>
-              <label className="font-medium">Email</label>
+              <label className="font-medium">{t('Email')}</label>
               <input
                 type="email"
                 required
@@ -73,7 +75,7 @@ const RegisterComponent = () => {
               />
             </div>
             <div>
-              <label className="font-medium">Password</label>
+              <label className="font-medium">{t('Password')}</label>
               <input
                 type="password"
                 required
@@ -86,7 +88,7 @@ const RegisterComponent = () => {
               type="submit"
               className="w-full px-4 py-2 text-white font-medium bg-[#6A1515] hover:bg-[#551111] active:bg-[#551111] rounded-lg duration-150"
             >
-              Create account
+              {t('Create account')}
             </button>
           </form>
           {/* Other buttons or links */}

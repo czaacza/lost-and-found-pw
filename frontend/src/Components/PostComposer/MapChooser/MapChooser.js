@@ -8,6 +8,7 @@ import {
   Popup,
 } from 'react-leaflet';
 import L from 'leaflet';
+import { useTranslation } from 'react-i18next';
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -27,6 +28,7 @@ function MyComponent({ setChosenPosition }) {
   return null;
 }
 const MapChooser = ({ position, setPosition }) => {
+  const { t } = useTranslation();
   const centerPosition = [52.220558592308336, 21.00985851319848];
 
   return (
@@ -34,7 +36,7 @@ const MapChooser = ({ position, setPosition }) => {
       <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div className="flex flex-col justify-between p-4 leading-normal">
           <h5 className="mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">
-            Choose item location
+            {t('Choose item location')}
           </h5>
           <div className="map-chooser-container">
             <div className="map-chooser">
@@ -49,7 +51,7 @@ const MapChooser = ({ position, setPosition }) => {
                 />
                 {position && position[0] && position[1] && (
                   <Marker position={position} icon={icon}>
-                    <Popup>Your lost item estimated location</Popup>
+                    <Popup>{t('Your lost item estimated location')}</Popup>
                   </Marker>
                 )}
                 <MyComponent setChosenPosition={setPosition} />
