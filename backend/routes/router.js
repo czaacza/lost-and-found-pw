@@ -19,6 +19,8 @@ const {
   updatePost,
   deletePost,
   getPostByUserId,
+  getPostsSortedByOldest,
+  getPostsSortedByMostComments,
 } = require('../controllers/post');
 
 const {
@@ -35,22 +37,29 @@ const router = require('express').Router();
 router.post('/users', addUser);
 router.post('/login', login);
 
-router
-  .post('/posts', addPost)
-  .get('/posts', getPosts)
-  .get('/posts/:id', getPost)
-  .put('/posts/:id', updatePost)
-  .get('/posts/user/:userId', getPostByUserId)
-  .get('/comments/post/:postId', getCommentsByPostId);
+router.get('/posts', getPosts);
+router.get('/posts/user/:userId', getPostByUserId);
+router.get('/posts/oldest', getPostsSortedByOldest);
+router.get('/posts/most-comments', getPostsSortedByMostComments);
+router.get('/posts/:id', getPost);
+
+router.get('/comments/post/:postId', getCommentsByPostId);
 
 // logged in user access
-router.get('/users/:id', verifyToken, getUser);
 router.get('/user/profile', verifyToken, getUserProfile);
 router.post('/logout', verifyToken, logout);
+router.get('/users/:id', verifyToken, getUser);
+
+router.post('/posts', verifyToken, addPost);
+router.put('/posts/:id', verifyToken, updatePost);
+
+router.post('/comments', verifyToken, addComment);
+
+router.delete('/comments/:id', verifyToken, deleteComment);
+
 // router.post('/check-email', checkEmailExists);
 // router.post('/forgot-password', forgotPassword);
 // router.patch('/reset-password/:token', resetPassword);
-router.post('/comments', verifyToken, addComment);
 
 // only-admin access
 router.get('/users', verifyToken, requireRole('admin'), getUsers);

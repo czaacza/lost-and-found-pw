@@ -83,7 +83,7 @@ exports.deletePost = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
-    await post.remove();
+    await post.deleteOne();
     res.status(200).json({ message: 'Post deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -93,8 +93,57 @@ exports.deletePost = async (req, res) => {
 exports.getPostByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const post = await PostSchema.find({ userId }).sort({ createdAt: -1 });
+    const post = await PostSchema.find({ userId })
+      .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      })
+      .sort({ createdAt: 1 });
     res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getPostsSortedByOldest = async (req, res) => {
+  try {
+    const posts = await PostSchema.find()
+      .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      })
+      .sort({ createdAt: 1 });
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getPostsSortedByMostComments = async (req, res) => {
+  try {
+    const posts = await PostSchema.find()
+      .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      });
+
+    posts.sort((a, b) => {
+      return b.comments.length - a.comments.length;
+    });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

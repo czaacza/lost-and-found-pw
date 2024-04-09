@@ -17,13 +17,20 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      getPostsByUser(user.id);
+      getPostsByUser(user._id);
     }
   }, [user]);
 
-  const getPosts = async () => {
+  const getPosts = async (sortOrder = 'newest') => {
     try {
-      const response = await axios.get(`${BASE_URL}/posts`);
+      let response;
+      if (sortOrder === 'oldest') {
+        response = await axios.get(`${BASE_URL}/posts/oldest`);
+      } else if (sortOrder === 'most-comments') {
+        response = await axios.get(`${BASE_URL}/posts/most-comments`);
+      } else {
+        response = await axios.get(`${BASE_URL}/posts`);
+      }
       console.log('response: ', response);
       setPosts(response.data);
     } catch (error) {
@@ -44,13 +51,12 @@ export const GlobalProvider = ({ children }) => {
   const addPost = async (postToAdd) => {
     try {
       console.log('postToAdd: ', postToAdd);
-      const token = sessionStorage.getItem('userToken');
-      if (token) {
-        const response = await axios.post(`${BASE_URL}/posts`, postToAdd);
-        console.log('response: ', response);
-        getPosts();
-        console.log('post added');
-      }
+      const response = await axios.post(`${BASE_URL}/posts`, postToAdd, {
+        withCredentials: true,
+      });
+      console.log('response: ', response);
+      getPosts();
+      console.log('post added');
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +64,9 @@ export const GlobalProvider = ({ children }) => {
 
   const deletePost = async (id) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/posts/${id}`);
+      const response = await axios.delete(`${BASE_URL}/posts/${id}`, {
+        withCredentials: true,
+      });
       console.log('response: ', response);
       getPosts();
     } catch (error) {
@@ -77,15 +85,21 @@ export const GlobalProvider = ({ children }) => {
     comments
   ) => {
     try {
-      const response = await axios.put(`${BASE_URL}/posts/${id}`, {
-        text,
-        date,
-        category,
-        photos,
-        tags,
-        likes,
-        comments,
-      });
+      const response = await axios.put(
+        `${BASE_URL}/posts/${id}`,
+        {
+          text,
+          date,
+          category,
+          photos,
+          tags,
+          likes,
+          comments,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log('response: ', response);
       getPosts();
     } catch (error) {
@@ -98,16 +112,24 @@ export const GlobalProvider = ({ children }) => {
       console.log('ADD COMMENT, COMMENT TO ADD:', commentToAdd);
       const token = sessionStorage.getItem('userToken');
 
-      if (token) {
-        const response = await axios.post(
-          `${BASE_URL}/comments`,
-          commentToAdd,
-          { withCredentials: true }
-        );
-        console.log('response: ', response);
+      const response = await axios.post(`${BASE_URL}/comments`, commentToAdd, {
+        withCredentials: true,
+      });
+      console.log('response: ', response);
 
-        getPosts();
-      }
+      getPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeComment = async (id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/comments/${id}`, {
+        withCredentials: true,
+      });
+      console.log('response: ', response);
+      getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -124,6 +146,7 @@ export const GlobalProvider = ({ children }) => {
         deletePost,
         updatePost,
         addComment,
+        removeComment,
       }}
     >
       {children}

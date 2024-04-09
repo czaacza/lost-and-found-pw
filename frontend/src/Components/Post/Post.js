@@ -46,6 +46,7 @@ function Post({ post }) {
     comments: post.comments,
     location: post.location,
   };
+  console.log('postInfo: ', post);
 
   const [showComments, setShowComments] = useState(false);
   const [showMap, setShowMap] = useState(false);

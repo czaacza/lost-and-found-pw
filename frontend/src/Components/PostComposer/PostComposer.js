@@ -40,8 +40,6 @@ function PostComposer({ postType, setPostType }) {
         .then((response) => response.json())
         .then((data) => {
           // This path might vary depending on the response structure
-          console.log('Raw location data', data);
-          console.log('Real location name', data.display_name);
           const address = data['address'] ? data['address'] : {};
           const amenity = address['amenity'] ? address['amenity'] + ', ' : '';
           const road = address['road'] ? address['road'] : '';

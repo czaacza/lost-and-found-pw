@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Comment from './Comment';
 import CommentComposer from './CommentComposer';
 
-const CommentSection = ({ comments, postId }) => {
+const CommentSection = ({ comments: initialComments, postId }) => {
+  const [comments, setComments] = useState(initialComments);
   const [replyTo, setReplyTo] = useState(null);
 
   const handleReply = (username) => {
@@ -10,18 +11,25 @@ const CommentSection = ({ comments, postId }) => {
     setReplyTo(username);
   };
 
+  const handleRemoveComment = (id) => {
+    setComments(comments.filter((comment) => comment._id !== id));
+  };
+
   return (
     <div>
       <div className="bg-white p-1  rounded-lg space-y-4">
         {comments.map((comment, index) => (
-          <div className="my-0">
+          <div key={comment._id} className="my-0">
+            {' '}
+            {/* Ensure each comment has a unique key */}
             <Comment
-              key={index}
+              id={comment._id}
               username={comment.userId.username}
               profilePic={comment.userId.image}
               date={comment.date}
               content={comment.text}
               onReply={() => handleReply(comment.userId.username)}
+              onRemove={handleRemoveComment} // Pass the remove function as a prop
             />
           </div>
         ))}

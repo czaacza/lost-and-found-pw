@@ -74,9 +74,13 @@ const LoginComponent = () => {
             {t('Sign in')}
           </button>
         </form>
-        <button className="w-full px-4 py-2 text-[#1c1c1c] font-medium bg-gray-100 hover:bg-gray-300 active:bg-gray-300 rounded-full duration-150 border-2 border-gray-600">
-          {t('Sign in using USOS')}
-        </button>
+        <div>
+          <a href="https://cas.usos.pw.edu.pl/cas/login">
+            <button className="w-full px-4 py-2 text-[#1c1c1c] font-medium bg-gray-100 hover:bg-gray-300 active:bg-gray-300 rounded-full duration-150 border-2 border-gray-600">
+               {t('Sign in using USOS')}
+            </button>
+          </a>
+        </div>
       </div>
     </main>
   );

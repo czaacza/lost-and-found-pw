@@ -15,8 +15,13 @@ function Map() {
 
   const { posts } = useGlobalContext();
 
-  const customIcon = new Icon({
+  const iconLost = new Icon({
     iconUrl: require('../../img/geo-icon.png'),
+    iconSize: [32, 32],
+  });
+
+  const iconFound = new Icon({
+    iconUrl: require('../../img/pl-flag.png'),
     iconSize: [32, 32],
   });
 
@@ -41,7 +46,7 @@ function Map() {
                 <Marker
                   key={post._id}
                   position={post.location.coordinates}
-                  icon={customIcon}
+                  icon={post.category === 'LOST' ? iconLost : iconFound}
                 >
                   <Popup>
                     <div className="popup-container">

@@ -38,7 +38,7 @@ function Profile() {
       </div>
       {/* show user posts */}
       <div className="profile-posts">
-        <h3>{t('Your Posts:')}</h3>
+        <h3 className="text-center text-md text-gray-800 mb-3">{t('Your Posts:')}</h3>
         {userPosts &&
           userPosts.map((post) => <Post key={post._id} post={post} />)}
       </div>
