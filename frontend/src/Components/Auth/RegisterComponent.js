@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; // Adjust the import path as necessary
 import logo from '../../img/lf-logo-pw-light.png'; // Adjust the import path for your logo
+import logo_dark from '../../img/lf-logo-pw-dark.png';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterComponent = () => {
@@ -29,12 +30,12 @@ const RegisterComponent = () => {
   };
 
   return (
-    <main className="w-full h-screen flex flex-col items-center justify-center bg-gray-50 sm:px-4">
-      <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
+    <main className="w-full h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-neutral-900 sm:px-4">
+      <div className="w-full space-y-6 text-gray-600 dark:text-neutral-400 sm:max-w-md">
         <div className="text-center">
-          <img src={logo} width={150} className="mx-auto" alt="Logo" />
+          <img src={logo_dark} width={150} className="mx-auto" alt="Logo" />
           <div className="mt-5 space-y-2">
-            <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
+            <h3 className="text-gray-800 dark:text-neutral-50 text-2xl font-bold sm:text-3xl">
               Create an account
             </h3>
             <p>
@@ -50,14 +51,14 @@ const RegisterComponent = () => {
         </div>
         {/* Display error message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+        <div className="bg-[#FFFFFF] dark:bg-neutral-800 dark:text-neutral-300 shadow p-4 py-6 sm:p-6 sm:rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="font-medium">Name</label>
               <input
                 type="text"
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                className="w-full mt-2 px-3 py-2 text-gray-500 dark:text-neutral-100  bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -67,7 +68,7 @@ const RegisterComponent = () => {
               <input
                 type="email"
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                className="w-full mt-2 px-3 py-2 text-gray-500 dark:text-neutral-100 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -77,7 +78,7 @@ const RegisterComponent = () => {
               <input
                 type="password"
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                className="w-full mt-2 px-3 py-2 text-gray-500 dark:text-neutral-100 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

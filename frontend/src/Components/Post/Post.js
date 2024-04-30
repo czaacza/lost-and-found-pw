@@ -60,7 +60,7 @@ function Post({ post }) {
       {/* This is an example component */}
       <div className="flex items-center justify-center mb-5">
         {' '}
-        <div className="rounded-xl border p-4 shadow-md w-full bg-[#FFFFFF] dark:bg-neutral-800 dark:border-none">
+        <div className="rounded-xl  p-4 shadow-md w-full bg-[#FFFFFF] dark:bg-neutral-800 dark:border-none">
           <div className="flex w-full items-center justify-between border-b dark:border-neutral-700 pb-3">
             <div className="flex items-center space-x-3">
               <div
@@ -71,7 +71,7 @@ function Post({ post }) {
                   backgroundPosition: 'center',
                 }}
               />{' '}
-              <div className="text-lg font-bold text-slate-700 dark:text-slate-300">
+              <div className="text-lg font-bold text-slate-700 dark:text-slate-400">
                 {' '}
                 {postInfo.author}{' '}
               </div>

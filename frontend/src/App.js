@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div className="dark">
+    <div className="nodark">
     <AuthProvider>
         <GlobalProvider>
         <BrowserRouter>

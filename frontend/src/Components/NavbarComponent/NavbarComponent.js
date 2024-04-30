@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../img/lf-logo-pw.png'; // Replace with the actual path to your logo
+import logo_dark from'../../img/lf-logo-pw-dark.png';
 import './NavbarComponent.css';
 import avatar from '../../img/avatar-placeholder.png';
 import { useNavigate } from 'react-router-dom';
@@ -95,7 +96,7 @@ const NavbarComponent = () => {
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
           <a href="/">
-            <img src={logo} width={150} height={50} alt="logo" />
+            <img src={logo_dark} width={150} height={50} alt="logo" />
           </a>
         </div>
         <div className="flex-1 flex items-center justify-between">
@@ -126,7 +127,7 @@ const NavbarComponent = () => {
                     href="/login"
                     className="block text-gray-900 dark:text-neutral-50"
                   >
-                    Log in
+                    <span className="dark:text-neutral-50">Log in</span>
                   </a>
                   <a
                     href="/signup"

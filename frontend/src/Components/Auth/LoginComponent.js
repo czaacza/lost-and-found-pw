@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../img/lf-logo-pw-light.png';
+import logo_dark from '../../img/lf-logo-pw-dark.png';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,11 +26,11 @@ const LoginComponent = () => {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
-      <div className="max-w-sm w-full text-gray-600 space-y-5">
+      <div className="max-w-sm w-full text-gray-600 dark:text-neutral-400 space-y-5">
         <div className="text-center pb-8">
-          <img src={logo} width={150} className="mx-auto" alt="Logo" />
+          <img src={logo_dark} width={150} className="mx-auto" alt="Logo" />
           <div className="mt-5">
-            <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
+            <h3 className="text-gray-800 dark:text-neutral-50 text-2xl font-bold sm:text-3xl">
               Log in to your account
             </h3>
           </div>
@@ -42,7 +43,7 @@ const LoginComponent = () => {
             <input
               type="text"
               required
-              className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              className="w-full mt-2 px-3 py-2 text-gray-500 dark:text-neutral-50 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -52,7 +53,7 @@ const LoginComponent = () => {
             <input
               type="password"
               required
-              className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              className="w-full mt-2 px-3 py-2 text-gray-500 dark:text-neutral-50 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

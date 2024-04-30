@@ -56,13 +56,13 @@ const Comment = ({
           alt={`${username}'s profile pic`}
           className="w-8 h-8 rounded-full object-cover mt-1"
         />
-        <div className="flex-1 bg-gray-200 p-3 rounded-lg">
+        <div className="flex-1 bg-gray-200 dark:bg-gray-500 p-3 rounded-lg">
           <div className="flex justify-between items-center mb-1">
             <div className="flex items-center gap-3">
-              <h5 className="font-semibold text-sm leading-tight">
+              <h5 className="font-semibold text-sm leading-tight dark:text-neutral-300">
                 {username}
               </h5>
-              <span className="text-xs text-gray-500">{date}</span>
+              <span className="text-xs text-gray-500 dark:text-gray-300">{date}</span>
             </div>
             {user && user.username === username && (
               <div className="flex items-center space-x-2">
@@ -90,10 +90,10 @@ const Comment = ({
               </ul>
             </div>
           )}
-          <p className="text-gray-800 text-sm mb-2 leading-snug">{content}</p>
+          <p className="text-gray-800 dark:text-neutral-50 text-sm mb-2 leading-snug">{content}</p>
           <button
             onClick={onReply}
-            className="flex items-center text-blue-500 text-xs hover:underline"
+            className="flex items-center text-blue-500 dark:text-blue-900 text-xs hover:underline"
           >
             <FontAwesomeIcon icon={faReply} className="text-xs mr-1" />
             Reply
