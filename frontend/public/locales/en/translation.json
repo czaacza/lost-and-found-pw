@@ -1,0 +1,63 @@
+{
+    "Home": "Home",
+    "Map": "Map",
+    "Profile": "Profile",
+    "Change language": "Change language",
+    "English": "English",
+    "Polish": "Polish",
+    "Settings": "Settings",
+    "Log in": "Log in",
+    "Log out": "Log out",
+    "Sign up": "Sign up",
+
+    "Sort with": "Sort with",
+    "Newest": "Newest",
+    "Most comments": "Most comments",
+    
+    "Lost": "Lost",
+    "Found": "Found",
+
+    "I": "I",
+    "lost": "lost",
+    "found": "found",
+    "item": "item",
+    "Please describe the item you lost or found...": "Please describe the item you lost or found...",
+    "Photo or Video": "Photo or Video",
+    "Tag": "Tag",
+    "Location": "Location",
+    "Your lost item estimated location": "Your lost item estimated location",
+    "Post": "Post",
+    "No tags": "No tags",
+    "Today": "Today",
+    "Write a comment...": "Write a comment...",
+    "Comment": "Comment",
+    "Edit": "Edit",
+    "Remove": "Remove",
+    "Reply": "Reply",
+
+    "Popular locations": "Popular locations",
+    "Chemistry Building": "Chemistry Building",
+    "Physics Building": "Physics Building",
+    "MiNi Building": "MiNi Building",
+
+    "Recently lost items": "Recently lost items",
+    "By": "By",
+
+    "Log in to your account": "Log in to your account",
+    "Username": "Username",
+    "Password": "Password",
+    "Forgot password?": "Forgot password?",
+    "Sign in": "Sign in",
+    "Sign in using USOS": "Sign in using USOS",
+
+    "Create an account": "Create an account",
+    "Already have an account?": "Already have an account?",
+    "Name": "Name",
+    "Email": "Email",
+    "Create account": "Create account",
+
+    "Date Joined": "Date Joined:",
+    "Choose item location": "Choose item location",
+    "Estimated location:": "Estimated location:",
+    "Your Posts:": "Your Posts:"
+}

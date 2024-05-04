@@ -93,7 +93,16 @@ exports.deletePost = async (req, res) => {
 exports.getPostByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const post = await PostSchema.find({ userId }).sort({ createdAt: -1 });
+    const post = await PostSchema.find({ userId })
+      .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      })
+      .sort({ createdAt: 1 });
     res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ message: error.message });

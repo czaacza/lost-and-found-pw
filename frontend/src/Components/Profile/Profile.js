@@ -10,8 +10,10 @@ import { useGlobalContext } from '../../context/GlobalContext';
 import Post from '../Post/Post';
 import PostComposer from '../PostComposer/PostComposer';
 import avatar from '../../img/avatar-placeholder.png'; // Replace with the path to your profile picture
+import { useTranslation } from 'react-i18next';
 
 function Profile() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { userPosts } = useGlobalContext();
 
@@ -21,11 +23,11 @@ function Profile() {
         <div className="header-menu">
           <div className="user-profile-info">
             <UserPhoto photo={user && user.image ? user.image : avatar} />
-            <UserInfo label="Username" value={user ? user.username : ''} />
-            <UserInfo label="Email" value={user ? user.email : ''} />
+            <UserInfo label={t('Username')} value={user ? user.username : ''} />
+            <UserInfo label={t('Email')} value={user ? user.email : ''} />
             {/* Masked for privacy */}
             <UserInfo
-              label="Date Joined"
+              label={t('Date Joined')}
               value={user ? user.createdAt.slice(0, 10) : ''}
             />
           </div>
@@ -36,7 +38,7 @@ function Profile() {
       </div>
       {/* show user posts */}
       <div className="profile-posts">
-        <h3>Your Posts:</h3>
+        <h3 className="text-center text-md text-gray-800 mb-3">{t('Your Posts:')}</h3>
         {userPosts &&
           userPosts.map((post) => <Post key={post._id} post={post} />)}
       </div>

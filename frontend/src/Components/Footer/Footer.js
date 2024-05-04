@@ -10,7 +10,7 @@ const Footer = () => {
           href="/"
           className="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img src={logo_dark} width={150} height={50} alt="logo" />
+          <img src={logo} width={150} height={50} alt="logo" />
         </a>
         <p className="my-6 text-gray-500 dark:text-gray-400">
           Lost & Found service for the society of Warsaw University of
