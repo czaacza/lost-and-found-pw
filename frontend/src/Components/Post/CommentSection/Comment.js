@@ -6,8 +6,6 @@ import avatar from '../../../img/avatar-placeholder.png';
 import { useGlobalContext } from '../../../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 
-
-
 const Comment = ({
   id,
   username,
@@ -17,11 +15,11 @@ const Comment = ({
   onReply,
   onRemove,
 }) => {
-  const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const { user } = useAuth();
   const { removeComment } = useGlobalContext();
+  const { t } = useTranslation();
 
   const handleRemove = async () => {
     try {

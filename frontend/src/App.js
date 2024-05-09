@@ -1,7 +1,6 @@
 // App.js
 
 import React from 'react';
-import Header from './Components/Header/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Map from './Components/Map/Map';
