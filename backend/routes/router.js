@@ -46,7 +46,7 @@ router.get('/posts/:id', getPost);
 router.get('/comments/post/:postId', getCommentsByPostId);
 
 // logged in user access
-router.get('/user/profile', verifyToken, getUserProfile);
+router.get('/user/profile/:username', verifyToken, getUserProfile);
 router.post('/logout', verifyToken, logout);
 router.get('/users/:id', verifyToken, getUser);
 

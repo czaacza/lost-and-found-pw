@@ -89,8 +89,9 @@ exports.getUserProfile = async (req, res) => {
       return res.status(400).json({ message: 'Invalid sender ID' });
     }
 
-    const user = await UserSchema.findById(req.user.id).select('-password'); // Exclude password from the result
-
+  //const user = await UserSchema.findById(req.user.id).select('-password'); // Exclude password from the result
+  const user = await UserSchema.findOne({ username: req.params.username }).select('-password');
+  
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
