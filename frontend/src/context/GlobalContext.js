@@ -10,8 +10,11 @@ export const GlobalProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const { user, setUser } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
 
   useEffect(() => {
+    loadUsers();
     getPosts();
   }, []);
 
@@ -20,6 +23,21 @@ export const GlobalProvider = ({ children }) => {
       getPostsByUser(user._id);
     }
   }, [user]);
+
+  const loadUsers = async () => {
+    setLoadingUsers(true);
+    try {
+        const response = await axios.get(`${BASE_URL}/allusers`, {
+            withCredentials: true
+        });
+        setUsers(response.data);
+    } catch (error) {
+        console.error('Error loading users:', error);
+    } finally {
+        setLoadingUsers(false);
+    }
+};
+
 
   const getPosts = async (sortOrder = 'newest') => {
     try {
@@ -140,6 +158,8 @@ export const GlobalProvider = ({ children }) => {
       value={{
         posts,
         userPosts,
+        users,
+        loadingUsers,
         getPosts,
         getPostsByUser,
         addPost,
@@ -147,6 +167,7 @@ export const GlobalProvider = ({ children }) => {
         updatePost,
         addComment,
         removeComment,
+        loadUsers,
       }}
     >
       {children}

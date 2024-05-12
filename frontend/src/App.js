@@ -13,6 +13,7 @@ import './App.css';
 import RegisterComponent from './Components/Auth/RegisterComponent';
 import LoginComponent from './Components/Auth/LoginComponent';
 import Footer from './Components/Footer/Footer';
+import ListOfUsers from './Components/ListOfUsers/ListOfUsers'
 
 function App() {
   const AppContent = () => {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/users" element={<ListOfUsers />} />
           {!user && <Route path="/login" element={<LoginComponent />} />}
           {!user && <Route path="/signup" element={<RegisterComponent />} />}
         </Routes>

@@ -61,6 +61,8 @@ router.delete('/comments/:id', verifyToken, deleteComment);
 // router.post('/forgot-password', forgotPassword);
 // router.patch('/reset-password/:token', resetPassword);
 
+router.get('/allusers', getUsers);
+
 // only-admin access
 router.get('/users', verifyToken, requireRole('admin'), getUsers);
 router.delete('/users/:id', verifyToken, requireRole('admin'), deleteUser);

@@ -157,6 +157,7 @@ const NavbarComponent = () => {
   const navigation = [
     { title: t('Home'), path: '/' },
     { title: t('Map'), path: '/map' },
+    { title: t('Users'), path: '/users' },
   ];
   return (
     <nav className="bg-white border-b">
