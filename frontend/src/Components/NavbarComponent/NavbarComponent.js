@@ -184,7 +184,7 @@ const NavbarComponent = () => {
               ))}
               {user && !loading && (
                 <li className="text-gray-900 hover:text-gray-900 ">
-                  <a href="/profile" className="font-normal">
+                  <a href={`/profile/${user.username}`} className="font-normal">
                     {t('Profile')}
                   </a>
                 </li>

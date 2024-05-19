@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios, {request} from 'axios';
+import axios, { request } from 'axios';
 import { jwtDecode } from 'jwt-decode'; // Make sure to npm install jwt-decode
-
 
 const AuthContext = createContext();
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -10,17 +9,20 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const loadUserProfile = async ( username ) => {
+  const loadUserProfile = async (username) => {
     try {
       setLoading(true); // Start loading
 
       const token = sessionStorage.getItem('userToken');
       if (token) {
         // Optional: Send token in Authorization header or as a cookie
-        const userResponse = await axios.get('${BASE_URL}/user/profile/${username}', {
-          withCredentials: true,
-          // headers: { Authorization: `Bearer ${token}` },
-        });
+        const userResponse = await axios.get(
+          `${BASE_URL}/user/profile/${username}`,
+          {
+            withCredentials: true,
+            // headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setUser(userResponse.data);
         sessionStorage.setItem('user', JSON.stringify(userResponse.data));
       }
@@ -40,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post(
         `${BASE_URL}/login`,
-        { username, password},
+        { username, password },
         { withCredentials: true }
       );
       if (response.status === 200 && response.data.token) {
