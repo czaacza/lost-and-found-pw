@@ -10,8 +10,11 @@ export const GlobalProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const { user, setUser } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
 
   useEffect(() => {
+    loadUsers();
     getPosts();
   }, []);
 
@@ -20,6 +23,20 @@ export const GlobalProvider = ({ children }) => {
       getPostsByUser(user._id);
     }
   }, [user]);
+
+  const loadUsers = async () => {
+    setLoadingUsers(true);
+    try {
+      const response = await axios.get(`${BASE_URL}/allusers`, {
+        withCredentials: true,
+      });
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error loading users:', error);
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
 
   const getPosts = async (sortOrder = 'newest') => {
     try {
@@ -31,7 +48,6 @@ export const GlobalProvider = ({ children }) => {
       } else {
         response = await axios.get(`${BASE_URL}/posts`);
       }
-      console.log('response: ', response);
       setPosts(response.data);
     } catch (error) {
       console.log(error);
@@ -41,7 +57,6 @@ export const GlobalProvider = ({ children }) => {
   const getPostsByUser = async (userId) => {
     try {
       const response = await axios.get(`${BASE_URL}/posts/user/${userId}`);
-      console.log('response: ', response);
       setUserPosts(response.data);
     } catch (error) {
       console.log(error);
@@ -54,7 +69,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.post(`${BASE_URL}/posts`, postToAdd, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
       console.log('post added');
     } catch (error) {
@@ -67,7 +81,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.delete(`${BASE_URL}/posts/${id}`, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -100,7 +113,6 @@ export const GlobalProvider = ({ children }) => {
           withCredentials: true,
         }
       );
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -115,7 +127,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.post(`${BASE_URL}/comments`, commentToAdd, {
         withCredentials: true,
       });
-      console.log('response: ', response);
 
       getPosts();
     } catch (error) {
@@ -128,7 +139,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.delete(`${BASE_URL}/comments/${id}`, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -140,6 +150,8 @@ export const GlobalProvider = ({ children }) => {
       value={{
         posts,
         userPosts,
+        users,
+        loadingUsers,
         getPosts,
         getPostsByUser,
         addPost,
@@ -147,6 +159,7 @@ export const GlobalProvider = ({ children }) => {
         updatePost,
         addComment,
         removeComment,
+        loadUsers,
       }}
     >
       {children}

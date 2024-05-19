@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { request } from 'axios';
 import { jwtDecode } from 'jwt-decode'; // Make sure to npm install jwt-decode
 
 const AuthContext = createContext();
@@ -9,17 +9,20 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const loadUserProfile = async () => {
+  const loadUserProfile = async (username) => {
     try {
       setLoading(true); // Start loading
 
       const token = sessionStorage.getItem('userToken');
       if (token) {
         // Optional: Send token in Authorization header or as a cookie
-        const userResponse = await axios.get(`${BASE_URL}/user/profile`, {
-          withCredentials: true,
-          // headers: { Authorization: `Bearer ${token}` },
-        });
+        const userResponse = await axios.get(
+          `${BASE_URL}/user/profile/${username}`,
+          {
+            withCredentials: true,
+            // headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setUser(userResponse.data);
         sessionStorage.setItem('user', JSON.stringify(userResponse.data));
       }
@@ -31,7 +34,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    loadUserProfile();
+    const storedUsername = sessionStorage.getItem('username');
+    loadUserProfile(storedUsername);
   }, []);
 
   const handleLogin = async (username, password) => {
@@ -42,8 +46,9 @@ export const AuthProvider = ({ children }) => {
         { withCredentials: true }
       );
       if (response.status === 200 && response.data.token) {
-        sessionStorage.setItem('userToken', response.data.token); // Store the token
-        await loadUserProfile(); // Load and store user profile
+        sessionStorage.setItem('userToken', response.data); // Store the token
+        sessionStorage.setItem('username', username);
+        await loadUserProfile(username); // Load and store user profile
       } else {
         throw new Error('Invalid credentials');
       }
