@@ -7,7 +7,6 @@ const CommentSection = ({ comments: initialComments, postId }) => {
   const [replyTo, setReplyTo] = useState(null);
 
   const handleReply = (username) => {
-    console.log(`Replying to ${username}`);
     setReplyTo(username);
   };
 

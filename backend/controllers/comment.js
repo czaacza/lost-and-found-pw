@@ -29,7 +29,6 @@ exports.addComment = async (req, res) => {
     }
 
     post.comments.push(comment._id);
-    console.log('new Post with comment: ', post);
 
     await post.save();
     await comment.save();

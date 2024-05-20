@@ -1,3 +1,5 @@
+// globalContext.js
+
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
@@ -9,9 +11,10 @@ const GlobalContext = React.createContext();
 export const GlobalProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
+  const [profileUserPosts, setProfileUserPosts] = useState([]);
 
   useEffect(() => {
     loadUsers();
@@ -20,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      getPostsByUser(user._id);
+      getPostsByUserId(user._id);
     }
   }, [user]);
 
@@ -54,10 +57,26 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  const getPostsByUser = async (userId) => {
+  const getPostsByUserId = async (userId) => {
     try {
-      const response = await axios.get(`${BASE_URL}/posts/user/${userId}`);
+      const response = await axios.get(
+        `${BASE_URL}/posts/user/userId/${userId}`
+      );
       setUserPosts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPostsByUsername = async (username) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/posts/user/username/${username}`,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +84,6 @@ export const GlobalProvider = ({ children }) => {
 
   const addPost = async (postToAdd) => {
     try {
-      console.log('postToAdd: ', postToAdd);
       const response = await axios.post(`${BASE_URL}/posts`, postToAdd, {
         withCredentials: true,
       });
@@ -121,7 +139,6 @@ export const GlobalProvider = ({ children }) => {
 
   const addComment = async (commentToAdd) => {
     try {
-      console.log('ADD COMMENT, COMMENT TO ADD:', commentToAdd);
       const token = sessionStorage.getItem('userToken');
 
       const response = await axios.post(`${BASE_URL}/comments`, commentToAdd, {
@@ -153,13 +170,15 @@ export const GlobalProvider = ({ children }) => {
         users,
         loadingUsers,
         getPosts,
-        getPostsByUser,
+        getPostsByUserId,
+        getPostsByUsername,
         addPost,
         deletePost,
         updatePost,
         addComment,
         removeComment,
         loadUsers,
+        profileUserPosts,
       }}
     >
       {children}

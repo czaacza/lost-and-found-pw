@@ -32,7 +32,6 @@ const icon = L.icon({
 
 function Post({ post }) {
   const { t } = useTranslation();
-  console.log(post.location.coordinates);
 
   // Dummy data for the example, you would replace this with actual props or state
   const postInfo = {
@@ -46,7 +45,6 @@ function Post({ post }) {
     comments: post.comments,
     location: post.location,
   };
-  console.log('postInfo: ', post);
 
   const [showComments, setShowComments] = useState(false);
   const [showMap, setShowMap] = useState(false);
@@ -155,7 +153,9 @@ function Post({ post }) {
                       {/* Fa Map icon */}
                       <FaSearchLocation className="mr-1.5 h-4 w-4" />
                       {/* <FaSearch className="mr-1.5 h-4 w-4" /> */}
-                      <span className="text-sm font-normal">{t('Location')}</span>
+                      <span className="text-sm font-normal">
+                        {t('Location')}
+                      </span>
                     </div>
                   )}
               </div>

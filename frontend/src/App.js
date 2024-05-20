@@ -13,7 +13,7 @@ import './App.css';
 import RegisterComponent from './Components/Auth/RegisterComponent';
 import LoginComponent from './Components/Auth/LoginComponent';
 import Footer from './Components/Footer/Footer';
-import ListOfUsers from './Components/ListOfUsers/ListOfUsers'
+import ListOfUsers from './Components/ListOfUsers/ListOfUsers';
 
 function App() {
   const AppContent = () => {
@@ -21,7 +21,7 @@ function App() {
 
     return (
       // add the containerCentered style if user is logged in
-      <div className="bg-gray-50">
+      <div className="main-content bg-gray-50">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />

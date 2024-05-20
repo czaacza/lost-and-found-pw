@@ -1,17 +1,51 @@
+/* Map.css */
+.horizontal-card-container {
+  margin: auto;
+  width: 1200px;
+  height: 100%;
+  margin: 96px auto;
+}
+
+.map-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px !important;
+  color: #333;
+}
+
+.horizontal-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.info-column {
+  width: 30%;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.map-wrapper {
+  width: 70%;
+  height: 500px;
+}
+
 .leaflet-container {
   height: 100%;
-  border-radius: 10px;
+  width: 100%;
+  /* border-radius: 10px; */
 }
 
-.map-container {
-  height: 100vh;
-  width: 100vw;
-  padding: 64px 240px;
+.contact-info h4 {
+  margin-top: 20px;
+  font-size: 18px;
 }
 
-.title-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
+.contact-info p {
+  margin: 5px 0;
+  color: #555;
 }
