@@ -72,3 +72,8 @@
 .comment-input {
   margin-top: 1rem;
 }
+
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+}
