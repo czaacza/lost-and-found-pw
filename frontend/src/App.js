@@ -1,7 +1,6 @@
 // App.js
 
 import React from 'react';
-import Header from './Components/Header/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Map from './Components/Map/Map';
@@ -15,6 +14,7 @@ import RegisterComponent from './Components/Auth/RegisterComponent';
 import LoginComponent from './Components/Auth/LoginComponent';
 import Footer from './Components/Footer/Footer';
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
+import ListOfUsers from './Components/ListOfUsers/ListOfUsers';
 
 function App() {
   const AppContent = () => {
@@ -22,11 +22,12 @@ function App() {
 
     return (
       // add the containerCentered style if user is logged in
-      <div className="bg-gray-50 dark:bg-neutral-900">
+      <div className="main-content bg-gray-50 dark:bg-neutral-900">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/users" element={<ListOfUsers />} />
           {!user && <Route path="/login" element={<LoginComponent />} />}
           {!user && <Route path="/signup" element={<RegisterComponent />} />}
         </Routes>

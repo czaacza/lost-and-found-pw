@@ -1,3 +1,5 @@
+// globalContext.js
+
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
@@ -9,17 +11,35 @@ const GlobalContext = React.createContext();
 export const GlobalProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  const [profileUserPosts, setProfileUserPosts] = useState([]);
 
   useEffect(() => {
+    loadUsers();
     getPosts();
   }, []);
 
   useEffect(() => {
     if (user) {
-      getPostsByUser(user._id);
+      getPostsByUserId(user._id);
     }
   }, [user]);
+
+  const loadUsers = async () => {
+    setLoadingUsers(true);
+    try {
+      const response = await axios.get(`${BASE_URL}/allusers`, {
+        withCredentials: true,
+      });
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error loading users:', error);
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
 
   const getPosts = async (sortOrder = 'newest') => {
     try {
@@ -31,18 +51,32 @@ export const GlobalProvider = ({ children }) => {
       } else {
         response = await axios.get(`${BASE_URL}/posts`);
       }
-      console.log('response: ', response);
       setPosts(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getPostsByUser = async (userId) => {
+  const getPostsByUserId = async (userId) => {
     try {
-      const response = await axios.get(`${BASE_URL}/posts/user/${userId}`);
-      console.log('response: ', response);
+      const response = await axios.get(
+        `${BASE_URL}/posts/user/userId/${userId}`
+      );
       setUserPosts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPostsByUsername = async (username) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/posts/user/username/${username}`,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -50,11 +84,9 @@ export const GlobalProvider = ({ children }) => {
 
   const addPost = async (postToAdd) => {
     try {
-      console.log('postToAdd: ', postToAdd);
       const response = await axios.post(`${BASE_URL}/posts`, postToAdd, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
       console.log('post added');
     } catch (error) {
@@ -67,7 +99,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.delete(`${BASE_URL}/posts/${id}`, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -100,7 +131,6 @@ export const GlobalProvider = ({ children }) => {
           withCredentials: true,
         }
       );
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -109,13 +139,11 @@ export const GlobalProvider = ({ children }) => {
 
   const addComment = async (commentToAdd) => {
     try {
-      console.log('ADD COMMENT, COMMENT TO ADD:', commentToAdd);
       const token = sessionStorage.getItem('userToken');
 
       const response = await axios.post(`${BASE_URL}/comments`, commentToAdd, {
         withCredentials: true,
       });
-      console.log('response: ', response);
 
       getPosts();
     } catch (error) {
@@ -128,7 +156,6 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.delete(`${BASE_URL}/comments/${id}`, {
         withCredentials: true,
       });
-      console.log('response: ', response);
       getPosts();
     } catch (error) {
       console.log(error);
@@ -140,13 +167,18 @@ export const GlobalProvider = ({ children }) => {
       value={{
         posts,
         userPosts,
+        users,
+        loadingUsers,
         getPosts,
-        getPostsByUser,
+        getPostsByUserId,
+        getPostsByUsername,
         addPost,
         deletePost,
         updatePost,
         addComment,
         removeComment,
+        loadUsers,
+        profileUserPosts,
       }}
     >
       {children}

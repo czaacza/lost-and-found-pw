@@ -18,9 +18,10 @@ const {
   getPosts,
   updatePost,
   deletePost,
-  getPostByUserId,
+  getPostsByUserId,
   getPostsSortedByOldest,
   getPostsSortedByMostComments,
+  getPostsByUserName,
 } = require('../controllers/post');
 
 const {
@@ -38,7 +39,8 @@ router.post('/users', addUser);
 router.post('/login', login);
 
 router.get('/posts', getPosts);
-router.get('/posts/user/:userId', getPostByUserId);
+router.get('/posts/user/username/:username', getPostsByUserName);
+router.get('/posts/user/userId/:userId', getPostsByUserId);
 router.get('/posts/oldest', getPostsSortedByOldest);
 router.get('/posts/most-comments', getPostsSortedByMostComments);
 router.get('/posts/:id', getPost);
@@ -46,7 +48,8 @@ router.get('/posts/:id', getPost);
 router.get('/comments/post/:postId', getCommentsByPostId);
 
 // logged in user access
-router.get('/user/profile', verifyToken, getUserProfile);
+router.get('/user/profile/external/:username', getUserProfile);
+router.get('/user/profile/:username', verifyToken, getUserProfile);
 router.post('/logout', verifyToken, logout);
 router.get('/users/:id', verifyToken, getUser);
 
@@ -60,6 +63,8 @@ router.delete('/comments/:id', verifyToken, deleteComment);
 // router.post('/check-email', checkEmailExists);
 // router.post('/forgot-password', forgotPassword);
 // router.patch('/reset-password/:token', resetPassword);
+
+router.get('/allusers', getUsers);
 
 // only-admin access
 router.get('/users', verifyToken, requireRole('admin'), getUsers);

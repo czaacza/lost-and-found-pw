@@ -42,7 +42,6 @@ exports.login = async (req, res) => {
       user.password
     );
     console.log('user', user);
-    console.log('isPasswordCorrect: ', isPasswordCorrect);
 
     if (!isPasswordCorrect) {
       // Increment failed login attempts
@@ -85,11 +84,18 @@ exports.logout = async (req, res) => {
 
 exports.getUserProfile = async (req, res) => {
   try {
-    if (!validateId(req.user.id)) {
-      return res.status(400).json({ message: 'Invalid sender ID' });
+    if (req.user && req.user.id) {
+      if (!validateId(req.user.id)) {
+        return res.status(400).json({ message: 'Invalid sender ID' });
+      }
     }
 
-    const user = await UserSchema.findById(req.user.id).select('-password'); // Exclude password from the result
+    //const user = await UserSchema.findById(req.user.id).select('-password'); // Exclude password from the result
+    const user = await UserSchema.findOne({
+      username: req.params.username,
+    }).select('-password');
+
+    console.log('Found user: ', user);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

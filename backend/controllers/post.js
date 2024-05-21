@@ -1,4 +1,5 @@
 const PostSchema = require('../models/PostModel');
+const UserSchema = require('../models/UserModel');
 
 exports.addPost = async (req, res) => {
   try {
@@ -90,7 +91,7 @@ exports.deletePost = async (req, res) => {
   }
 };
 
-exports.getPostByUserId = async (req, res) => {
+exports.getPostsByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
     const post = await PostSchema.find({ userId })
@@ -103,6 +104,34 @@ exports.getPostByUserId = async (req, res) => {
         },
       })
       .sort({ createdAt: 1 });
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getPostsByUserName = async (req, res) => {
+  try {
+    const username = req.params.username;
+    // find userId and then find posts by userId
+
+    const user = await UserSchema.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userId = user._id;
+    const post = await PostSchema.find({ userId })
+      .populate('userId')
+      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      })
+      .sort({ createdAt: 1 });
+    console.log('post', post);
     res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ message: error.message });

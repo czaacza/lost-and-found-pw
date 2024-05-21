@@ -5,7 +5,7 @@ import logo_dark from'../../img/lf-logo-pw-dark.png';
 import './NavbarComponent.css';
 import avatar from '../../img/avatar-placeholder.png';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import enFlag from '../../img/flags/uk-flag.png';
 import plFlag from '../../img/flags/pl-flag.png';
 
@@ -21,7 +21,7 @@ const ProfileDropDown = (props) => {
 
   const navigation = [
     { title: t('Profile'), path: '/profile' },
-    { title: t('Settings'), path: 'javascript:void(0)' },
+    // { title: t('Settings'), path: 'javascript:void(0)' },
   ];
 
   const handleSubmitLogout = () => {
@@ -73,6 +73,11 @@ const ProfileDropDown = (props) => {
             </li>
           ))}
           <li>
+            <div className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <LanguageSwitcher />
+            </div>
+          </li>
+          <li>
             <button
               onClick={handleSubmitLogout}
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -88,7 +93,7 @@ const ProfileDropDown = (props) => {
 
 const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState('en');
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef();
@@ -102,10 +107,9 @@ const LanguageSwitcher = () => {
   };
 
   const changeLanguage = (lng) => {
-    console.log(`Zmiana języka na: ${lng}`);
     i18n.changeLanguage(lng);
     setIsOpen(false);
-  }
+  };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -124,11 +128,17 @@ const LanguageSwitcher = () => {
       </button>
       {isOpen && (
         <div className="absolute right-0 bg-white mt-2 py-1 w-48 border rounded-md shadow-lg">
-          <div onClick={() => changeLanguage('en')} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+          <div
+            onClick={() => changeLanguage('en')}
+            className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
+          >
             <img src={enFlag} alt="English" className="w-6" />
             {t('English')}
           </div>
-          <div onClick={() => changeLanguage('pl')} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+          <div
+            onClick={() => changeLanguage('pl')}
+            className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
+          >
             <img src={plFlag} alt="Polski" className="w-6" />
             {t('Polish')}
           </div>
@@ -139,20 +149,21 @@ const LanguageSwitcher = () => {
 };
 
 const NavbarComponent = () => {
-  const [ t ] = useTranslation();
+  const [t] = useTranslation();
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title:  t('Home'), path: '/' },
+    { title: t('Home'), path: '/' },
     { title: t('Map'), path: '/map' },
+    { title: t('Users'), path: '/users' },
   ];
   return (
     <nav className="border-b dark:bg-neutral-800">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
-          <a href="/"> 
+          <a href="/">
             <img src={logo} width={150} height={50} alt="logo" />
           </a>
         </div>
@@ -173,12 +184,11 @@ const NavbarComponent = () => {
               ))}
               {user && !loading && (
                 <li className="text-gray-900 dark:text-neutral-50 hover:text-gray-900 ">
-                  <a href="/profile" className="font-normal">
+                  <a href={`/profile/${user.username}`} className="font-normal">
                     {t('Profile')}
                   </a>
                 </li>
               )}
-              <LanguageSwitcher />
               {!user && !loading && (
                 <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                   <a

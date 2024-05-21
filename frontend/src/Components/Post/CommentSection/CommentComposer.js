@@ -1,13 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
 import profilePic from '../../../img/avatar-placeholder.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faImage,
-  faUserTag,
-  faMapMarkerAlt,
-  faPaperPlane,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './CommentComposer.css';
 import { useGlobalContext } from '../../../context/GlobalContext';
 import { useAuth } from '../../../context/AuthContext';
@@ -61,7 +55,7 @@ const CommentComposer = ({ isSmall, postId }) => {
             <textarea
               ref={textareaRef}
               className="form-control input-field comment-composer-input bg-gray-200 dark:bg-gray-500 rounded-md"
-              placeholder={t("Write a comment...")}
+              placeholder={t('Write a comment...')}
               rows="3"
               value={text}
               onChange={(e) => setText(e.target.value)}
