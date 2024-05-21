@@ -1,26 +1,17 @@
 // Post.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Post.css'; // Make sure to create a Post.css file for styling
 import avatar from '../../img/avatar-placeholder.png';
 import CommentSection from './CommentSection/CommentSection';
 import CommentComposer from './CommentSection/CommentComposer';
-import {
-  FaLocationArrow,
-  FaMap,
-  FaMapMarked,
-  FaMapMarkedAlt,
-  FaMapMarker,
-  FaMapPin,
-  FaMapSigns,
-  FaRegMap,
-  FaSearch,
-  FaSearchLocation,
-} from 'react-icons/fa';
+import { FaSearchLocation } from 'react-icons/fa';
 import '../PostComposer/MapChooser/MapChooser.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '../../context/GlobalContext';
+import { useAuth } from '../../context/AuthContext';
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -32,9 +23,18 @@ const icon = L.icon({
 
 function Post({ post }) {
   const { t } = useTranslation();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const { removePost } = useGlobalContext();
+  const { user } = useAuth();
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   // Dummy data for the example, you would replace this with actual props or state
   const postInfo = {
+    id: post._id,
     author: post.userId.username,
     title: post.title,
     tags: post.tags,
@@ -44,6 +44,15 @@ function Post({ post }) {
     imageUrl: '../../img/boots.jpg',
     comments: post.comments,
     location: post.location,
+    userId: post.userId._id,
+  };
+
+  const handleRemove = async () => {
+    try {
+      await removePost(postInfo.id);
+    } catch (error) {
+      console.error('Error removing comment:', error);
+    }
   };
 
   const [showComments, setShowComments] = useState(false);
@@ -77,16 +86,47 @@ function Post({ post }) {
                 {postInfo.author}{' '}
               </div>
             </div>
-            <div className="flex items-center space-x-8">
-              <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
-                {postInfo.tags[0] ? postInfo.tags[0] : t('No tags')}
-              </button>
+            <div className="flex items-center space-x-8 relative">
               <div className="text-xs text-neutral-500">
                 {/* if today, display the hour, if not today, display the date */}
                 {postInfo.date === new Date().toISOString().slice(0, 10)
                   ? t('Today') + ', ' + postInfo.time
                   : postInfo.date}
               </div>
+              {postInfo.userId === user._id && (
+                <button
+                  className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold hover:bg-neutral-400"
+                  onClick={toggleDropdown}
+                >
+                  {postInfo.tags[0] ? postInfo.tags[0] : t('Close post')}
+                </button>
+              )}
+              {showDropdown && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-2 top-2 w-35 bg-white rounded-md shadow-lg z-10"
+                >
+                  <div className="">
+                    <h2 className="text-sm p-2 pb-0 pt-3 text-center">
+                      Are you sure?
+                    </h2>
+                    <div className="flex-row w-100 confirm-row px-3 pb-3">
+                      <button
+                        className="text-sm bg-neutral-200 py-2 px-3"
+                        onClick={handleRemove}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        className="text-sm bg-neutral-200 py-2 px-3 ml-2"
+                        onClick={toggleDropdown}
+                      >
+                        No
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-4 mb-6">
