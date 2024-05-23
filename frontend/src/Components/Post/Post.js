@@ -25,7 +25,7 @@ function Post({ post }) {
   const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
-  const { removePost } = useGlobalContext();
+  const { removePost, handleLike } = useGlobalContext();
   const { user } = useAuth();
 
   const toggleDropdown = () => {
@@ -45,6 +45,7 @@ function Post({ post }) {
     comments: post.comments,
     location: post.location,
     userId: post.userId._id,
+    likes: post.likes,
   };
 
   const handleRemove = async () => {
@@ -55,6 +56,7 @@ function Post({ post }) {
     }
   };
 
+  const [like, setLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const toggleShowMap = () => {
@@ -63,6 +65,10 @@ function Post({ post }) {
 
   const toggleComments = () => {
     setShowComments(!showComments);
+  };
+
+  const toggleLike = () => {
+    handleLike(postInfo.id);
   };
 
   return (
@@ -93,7 +99,7 @@ function Post({ post }) {
                   ? t('Today') + ', ' + postInfo.time
                   : postInfo.date}
               </div>
-              {postInfo.userId === user._id && (
+              {user && postInfo.userId === user._id && (
                 <button
                   className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold hover:bg-neutral-400"
                   onClick={toggleDropdown}
@@ -142,7 +148,10 @@ function Post({ post }) {
               <div className="flex justify-between w-full px-2">
                 {/* center left */}
                 <div className="flex space-x-6 md:space-x-6">
-                  <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                  <div
+                    className="flex cursor-pointer items-center transition hover:text-slate-600"
+                    onClick={toggleLike}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="mr-1.5 h-5 w-5"
@@ -157,7 +166,9 @@ function Post({ post }) {
                         d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
                       />
                     </svg>
-                    <span>4</span>
+                    <button>
+                      {postInfo.likes ? postInfo.likes.length : '0'}
+                    </button>
                   </div>
                   <div
                     className="flex cursor-pointer items-center transition hover:text-slate-600"
