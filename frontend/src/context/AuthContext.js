@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios, { request } from 'axios';
-import { jwtDecode } from 'jwt-decode'; // Make sure to npm install jwt-decode
+import { jwtDecode } from 'jwt-decode';
+import {useParams} from "react-router-dom"; // Make sure to npm install jwt-decode
 
 const AuthContext = createContext();
 const BASE_URL = 'http://localhost:3000/api/v1';
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
         );
         setUser(userResponse.data);
         sessionStorage.setItem('user', JSON.stringify(userResponse.data));
+
       }
     } catch (error) {
       console.error('Error loading user profile:', error);
@@ -34,9 +36,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+
+
     const storedUsername = sessionStorage.getItem('username');
     loadUserProfile(storedUsername);
   }, []);
+
+
+
 
   const handleLogin = async (username, password) => {
     try {

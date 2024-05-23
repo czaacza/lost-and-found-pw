@@ -1,17 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import {useParams} from "react-router-dom";
 
 const BASE_URL = 'http://localhost:3000/api/v1';
 
 const GlobalContext = React.createContext();
 
-export const GlobalProvider = ({ children }) => {
+export const GlobalProvider = ({ children, username }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const { user, setUser } = useAuth();
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
+
+  console.log("I am there new user", username)
 
   useEffect(() => {
     loadUsers();
@@ -167,6 +170,6 @@ export const GlobalProvider = ({ children }) => {
   );
 };
 
-export const useGlobalContext = () => {
+export const useGlobalContext = (username) => {
   return useContext(GlobalContext);
 };

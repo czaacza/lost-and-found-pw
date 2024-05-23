@@ -18,7 +18,6 @@ import ListOfUsers from './Components/ListOfUsers/ListOfUsers'
 function App() {
   const AppContent = () => {
     const { user } = useAuth();
-
     return (
       // add the containerCentered style if user is logged in
       <div className="bg-gray-50">
