@@ -173,6 +173,21 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const handleLike = async (postId) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/likes/${postId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      getPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -191,6 +206,7 @@ export const GlobalProvider = ({ children }) => {
         loadUsers,
         profileUserPosts,
         removePost,
+        handleLike,
       }}
     >
       {children}

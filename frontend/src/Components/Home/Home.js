@@ -5,7 +5,7 @@ import PostComposer from '../PostComposer/PostComposer';
 import { useGlobalContext } from '../../context/GlobalContext';
 import SwitchButtons from './SwitchButtons/SwitchButtons';
 import { useAuth } from '../../context/AuthContext';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 function Home() {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ function Home() {
                 className="btn btn-sort"
                 onClick={() => sortPosts('most-comments')}
               >
-                Most comments
+                Most active
               </button>
             </div>
           </div>
