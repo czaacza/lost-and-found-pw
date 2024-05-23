@@ -18,9 +18,10 @@ const BASE_URL = 'http://localhost:3000/api/v1';
 function Profile() {
   const { t } = useTranslation();
   const { username } = useParams();
-  const [user, setUser] = useState(null); // State to store the user profile
+  const [user1, setUser1] = useState(null); // State to store the user profile
   const [loading, setLoading] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
+  const { user } = useAuth();
 
   const loadUserProfile = async (username) => {
     try {
@@ -33,7 +34,7 @@ function Profile() {
               withCredentials: true,
             }
         );
-        setUser(userResponse.data);
+        setUser1(userResponse.data);
         sessionStorage.setItem('user', JSON.stringify(userResponse.data));
       }
     } catch (error) {
@@ -60,30 +61,32 @@ function Profile() {
   }, [username]);
 
   useEffect(() => {
-    if (user && user._id) {
-      getPostsByUser(user._id);
+    if (user1 && user1._id) {
+      getPostsByUser(user1._id);
     }
-  }, [user]);
+  }, [user1]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+
 
   return (
       <div className="profile-container">
         <div className="header-menu-container">
           <div className="header-menu">
             <div className="user-profile-info">
-              <UserPhoto photo={user && user.image ? user.image : avatar} />
-              <UserInfo label={t('Username')} value={user ? user.username : ''} />
-              <UserInfo label={t('Email')} value={user ? user.email : ''} />
+              <UserPhoto photo={user1 && user1.image ? user1.image : avatar} />
+              <UserInfo label={t('Username')} value={user1 ? user1.username : ''} />
+              <UserInfo label={t('Email')} value={user1 ? user1.email : ''} />
               <UserInfo
                   label={t('Date Joined')}
-                  value={user ? user.createdAt.slice(0, 10) : ''}
+                  value={user1 ? user1.createdAt.slice(0, 10) : ''}
               />
             </div>
             <div>
-              <PostComposer />
+              {user && user.username === username && <PostComposer />}
             </div>
           </div>
         </div>
