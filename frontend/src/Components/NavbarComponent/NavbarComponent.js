@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import enFlag from '../../img/flags/uk-flag.png';
 import plFlag from '../../img/flags/pl-flag.png';
-
+import { useGlobalContext } from '../../context/GlobalContext';
 // Profile Dropdown
 const ProfileDropDown = (props) => {
   const { t } = useTranslation();
@@ -151,7 +151,34 @@ const NavbarComponent = () => {
   const [t] = useTranslation();
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Add search term state
+  const navigate = useNavigate();
+  const [searchResults, setSearchResults] = useState([]);
+const [showResults, setShowResults] = useState(false);
+const { users } = useGlobalContext(); 
 
+const handleSearchChange = (e) => {
+  const searchTerm = e.target.value;
+  setSearchTerm(searchTerm);
+  if (searchTerm.trim()) {
+    const filtered = users.filter(user =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    ).slice(0, 4); 
+    setSearchResults(filtered);
+    setShowResults(true);
+  } else {
+    setShowResults(false);
+  }
+};
+function handleClick(event) {
+  if (searchResults.length === 0) {
+    event.preventDefault();  // Отменяет переход по ссылке
+  }
+}
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/profile/${searchTerm}`); // Navigate to a search page or handle filtering
+  };
   // Replace javascript:void(0) path with your path
   const navigation = [
     { title: t('Home'), path: '/' },
@@ -180,7 +207,36 @@ const NavbarComponent = () => {
                 >
                   <a href={item.path}>{item.title}</a>
                 </li>
+                
               ))}
+              <li>
+              <form onSubmit={handleSearchSubmit} className="flex items-center space-x-2 border rounded-md p-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 flex-none text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+  type="text"
+  placeholder={t('Search')}
+  value={searchTerm}
+  onChange={handleSearchChange}
+  onBlur={() => setTimeout(() => setShowResults(false), 100)}
+/>
+              </form>
+            </li>
+            {showResults && (
+  <ul className="absolute bg-white mt-2 py-1 w-48 border rounded-md shadow-lg z-10">
+    {searchResults.map(user => (
+      <li key={user.id} className="px-4 py-2 text-sm non-clickable">
+        <div>{user.username}</div>
+      </li>
+    ))}
+    {searchResults.length === 0 && (
+      <li className="px-4 py-2 text-sm non-clickable">No users found.</li>
+    )}
+  </ul>
+)}
+
+
               {user && !loading && (
                 <li className="text-gray-900 hover:text-gray-900 ">
                   <a href={`/profile/${user.username}`} className="font-normal">
