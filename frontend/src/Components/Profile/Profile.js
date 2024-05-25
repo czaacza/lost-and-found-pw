@@ -11,8 +11,36 @@ import avatar from '../../img/avatar-placeholder.png'; // Replace with the path 
 import { useTranslation } from 'react-i18next';
 import PostComposer from '../PostComposer/PostComposer';
 import { useAuth } from '../../context/AuthContext';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BASE_URL = 'http://localhost:3000/api/v1';
+
+const UploadButton = ({ onUpload }) => {
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      onUpload(file);
+    }
+  };
+
+  return (
+    <div className="upload-button">
+      <input
+        type="file"
+        id="file-upload"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
+      <label htmlFor="file-upload" className="upload-label">
+        <div className="plus-icon">
+          {' '}
+          <FontAwesomeIcon icon={faPlus} className="text-lg font-extrabold" />
+        </div>
+      </label>
+    </div>
+  );
+};
 
 function Profile() {
   const { t } = useTranslation();
@@ -40,6 +68,26 @@ function Profile() {
     fetchUserProfile();
   }, [username, getPostsByUsername]);
 
+  const handleUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/user/profile/upload`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      setProfileUser({ ...profileUser, image: response.data.image });
+    } catch (error) {
+      console.error('Error uploading profile picture:', error);
+    }
+  };
+
   if (!profileUser) {
     return <div></div>;
   }
@@ -49,7 +97,12 @@ function Profile() {
       <div className="header-menu-container">
         <div className="header-menu">
           <div className="user-profile-info">
-            <UserPhoto photo={profileUser.image || avatar} />
+            <div className="profile-picture-container relative">
+              <UserPhoto photo={profileUser.image || avatar} />
+              {user && user.username === profileUser.username && (
+                <UploadButton onUpload={handleUpload} />
+              )}
+            </div>
             <UserInfo label={t('Username')} value={profileUser.username} />
             <UserInfo label={t('Email')} value={profileUser.email} />
             <UserInfo

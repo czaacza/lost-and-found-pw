@@ -73,6 +73,7 @@
   margin-top: 1rem;
 }
 
-.separator {
-  border-color: #404040 !important;
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
 }

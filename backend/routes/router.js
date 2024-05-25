@@ -22,6 +22,7 @@ const {
   getPostsSortedByOldest,
   getPostsSortedByMostComments,
   getPostsByUserName,
+  handleLike,
 } = require('../controllers/post');
 
 const {
@@ -44,6 +45,7 @@ router.get('/posts/user/userId/:userId', getPostsByUserId);
 router.get('/posts/oldest', getPostsSortedByOldest);
 router.get('/posts/most-comments', getPostsSortedByMostComments);
 router.get('/posts/:id', getPost);
+router.delete('/posts/:id', verifyToken, deletePost);
 
 router.get('/comments/post/:postId', getCommentsByPostId);
 
@@ -59,6 +61,7 @@ router.put('/posts/:id', verifyToken, updatePost);
 router.post('/comments', verifyToken, addComment);
 
 router.delete('/comments/:id', verifyToken, deleteComment);
+router.post('/likes/:postId', verifyToken, handleLike);
 
 // router.post('/check-email', checkEmailExists);
 // router.post('/forgot-password', forgotPassword);

@@ -162,6 +162,32 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const removePost = async (id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/posts/${id}`, {
+        withCredentials: true,
+      });
+      getPosts();
+    } catch (error) {
+      console.error('Error removing comment:', error);
+    }
+  };
+
+  const handleLike = async (postId) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/likes/${postId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      getPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -179,6 +205,8 @@ export const GlobalProvider = ({ children }) => {
         removeComment,
         loadUsers,
         profileUserPosts,
+        removePost,
+        handleLike,
       }}
     >
       {children}
