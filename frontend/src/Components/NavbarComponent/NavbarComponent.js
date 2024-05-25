@@ -7,51 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import enFlag from '../../img/flags/uk-flag.png';
 import plFlag from '../../img/flags/pl-flag.png';
-
-const SearchBar = () => {
-  return (
-    <form class="max-w-md mx-auto">
-      <label
-        for="default-search"
-        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-      >
-        Search
-      </label>
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg
-            class="w-4 h-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-        </div>
-        <input
-          type="search"
-          id="default-search"
-          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search Mockups, Logos..."
-          required
-        />
-        <button
-          type="submit"
-          class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Search
-        </button>
-      </div>
-    </form>
-  );
-}
+import { useGlobalContext } from '../../context/GlobalContext';
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
@@ -197,11 +153,46 @@ const NavbarComponent = () => {
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState(''); // Add search term state
+  const navigate = useNavigate();
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+  const { users } = useGlobalContext();
+
+  const handleUserProfileClicked = (e) => {
+    const username = e.target.textContent;
+    navigate(`/profile/${username}`);
+  };
+
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+    if (searchTerm.trim()) {
+      const filtered = users
+        .filter((user) =>
+          user.username.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 4);
+      setSearchResults(filtered);
+      setShowResults(true);
+    } else {
+      setShowResults(false);
+    }
+  };
+  function handleClick(event) {
+    if (searchResults.length === 0) {
+      event.preventDefault(); // Отменяет переход по ссылке
+    }
+  }
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/profile/${searchTerm}`); // Navigate to a search page or handle filtering
+  };
+
   // Replace javascript:void(0) path with your path
   const navigation = [
     { title: t('Home'), path: '/' },
     { title: t('Map'), path: '/map' },
-    { title: t('Users'), path: '/users' },
   ];
   return (
     <nav className="bg-white border-b">
@@ -226,9 +217,6 @@ const NavbarComponent = () => {
                   <a href={item.path}>{item.title}</a>
                 </li>
               ))}
-              <li>
-                
-              </li>
               {user && !loading && (
                 <li className="text-gray-900 hover:text-gray-900 ">
                   <a href={`/profile/${user.username}`} className="font-normal">
@@ -236,6 +224,57 @@ const NavbarComponent = () => {
                   </a>
                 </li>
               )}
+              {user && !loading && (
+                <li className="mx-5">
+                  <form
+                    onSubmit={handleSearchSubmit}
+                    className="flex items-center space-x-2 border rounded-md p-1 relative"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 flex-none text-gray-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder={t('Search')}
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                      onBlur={() =>
+                        setTimeout(() => setShowResults(false), 100)
+                      }
+                    />
+                  </form>
+                  {showResults && (
+                    <ul className="absolute bg-white mt-2 py-1 w-48 border rounded-md shadow-lg z-10">
+                      {searchResults.map((user) => (
+                        <button
+                          key={user.id}
+                          className="px-4 py-2 text-sm non-clickable"
+                          onClick={handleUserProfileClicked}
+                        >
+                          <div>{user.username}</div>
+                        </button>
+                      ))}
+                      {searchResults.length === 0 && (
+                        <li className="px-4 py-2 text-sm non-clickable">
+                          No users found.
+                        </li>
+                      )}
+                    </ul>
+                  )}
+                </li>
+              )}
+
               {!user && !loading && (
                 <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                   <a

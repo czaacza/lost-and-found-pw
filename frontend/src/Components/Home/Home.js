@@ -31,19 +31,19 @@ function Home() {
                 className="btn btn-sort"
                 onClick={() => sortPosts('newest')}
               >
-                Newest
+                {t('Newest')}
               </button>
               <button
                 className="btn btn-sort"
                 onClick={() => sortPosts('oldest')}
               >
-                Oldest
+                {t('Oldest')}
               </button>
               <button
                 className="btn btn-sort"
                 onClick={() => sortPosts('most-comments')}
               >
-                Most active
+                {t('Most active')}
               </button>
             </div>
           </div>

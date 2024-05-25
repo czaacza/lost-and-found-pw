@@ -12,7 +12,7 @@
 
   "Sort with": "Sortuj według",
   "Newest": "Najnowsze",
-  "Most active": "Najbardziej aktywne",
+  "Most active": "Najw. aktywność",
 
   "Lost": "Zgubione",
   "Found": "Znalezione",
@@ -44,7 +44,7 @@
   "By": "Przez",
 
   "Log in to your account": "Zaloguj się do konta",
-  "Username": "Nazwa użytkownika",
+  "Username": "Nazwa",
   "Password": "Hasło",
   "Forgot password?": "Zapomniałeś hasła?",
   "Sign in": "Zaloguj się",
@@ -56,8 +56,20 @@
   "Email": "E-mail",
   "Create account": "Stwórz konto",
 
-  "Date Joined": "Data dołączenia:",
+  "Date Joined": "Data dołączenia",
   "Choose item location": "Wybierz lokalizację przedmiotu",
   "Estimated location:": "Przybliżona lokalizacja:",
-  "Your Posts:": "Twoje Posty:"
+  "Your Posts:": "Twoje Posty:",
+  "Search": "Szukaj ludzi...",
+  "Are you sure": "Jesteś pewny?",
+  "Yes": "Tak",
+  "No": "Nie",
+  "First name": "Imię",
+  "Surname": "Nazwisko",
+  "Phone": "Numer telefonu",
+  "Help Description": "Jeśli znalazłeś lub zgubiłeś coś na terenie Politechniki Warszawskiej, zachęcamy do zgłoszenia się do naszego Biura Rzeczy Znalezionych.",
+  "Main Building": "Gmach Główny PW",
+  "Address": "Adres",
+  "Contact us": "Skontaktuj się z nami",
+  "Lost an item?": "Zgubiłeś przedmiot?"
 }
