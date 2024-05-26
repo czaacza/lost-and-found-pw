@@ -15,6 +15,7 @@ export const GlobalProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [profileUserPosts, setProfileUserPosts] = useState([]);
+  const [theme, setTheme] = useState(getInitTheme);
 
   useEffect(() => {
     loadUsers();
@@ -188,6 +189,15 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
+
+  const switchTheme = () => {
+    setTheme(theme == "light" ? "dark" : "light");
+    return undefined
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -207,11 +217,17 @@ export const GlobalProvider = ({ children }) => {
         profileUserPosts,
         removePost,
         handleLike,
+        theme,
+        switchTheme,
       }}
     >
       {children}
     </GlobalContext.Provider>
   );
+};
+
+const getInitTheme = () => {
+  return JSON.parse(localStorage.getItem("theme")) ?? "light";
 };
 
 export const useGlobalContext = () => {

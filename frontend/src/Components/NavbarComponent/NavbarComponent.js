@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import enFlag from '../../img/flags/uk-flag.png';
 import plFlag from '../../img/flags/pl-flag.png';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 const SearchBar = () => {
   return (
@@ -56,6 +57,7 @@ const SearchBar = () => {
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
+  const { theme, switchTheme } = useGlobalContext();
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [menuState, setMenuState] = useState(false);
@@ -68,6 +70,9 @@ const ProfileDropDown = (props) => {
     { title: t('Profile'), path: `/profile/${user.username}` },
     // { title: t('Settings'), path: 'javascript:void(0)' },
   ];
+  const handleSwitchTheme = () => {
+    switchTheme();
+  };
 
   const handleSubmitLogout = () => {
     handleLogout();
@@ -122,6 +127,15 @@ const ProfileDropDown = (props) => {
               <LanguageSwitcher />
             </div>
           </li>
+          <li>
+            <button
+              onClick={handleSwitchTheme}
+              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              {t('Switch theme')}
+            </button>
+          </li>
+        
           <li>
             <button
               onClick={handleSubmitLogout}
