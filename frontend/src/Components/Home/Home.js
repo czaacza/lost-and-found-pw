@@ -31,19 +31,19 @@ function Home() {
                 className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('newest')}
               >
-                Newest
+                {t('Newest')}
               </button>
               <button
                 className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('oldest')}
               >
-                Oldest
+                {t('Oldest')}
               </button>
               <button
                 className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('most-comments')}
               >
-                Most active
+                {t('Most active')}
               </button>
             </div>
           </div>

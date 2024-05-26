@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../../context/GlobalContext';
 import { useAuth } from '../../../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 
-const CommentComposer = ({ isSmall, postId }) => {
+const CommentComposer = ({ isSmall, postId, setComments }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { addComment } = useGlobalContext();
@@ -34,6 +34,9 @@ const CommentComposer = ({ isSmall, postId }) => {
       try {
         await addComment(commentToAdd);
         setText('');
+        if (setComments) {
+          setComments((prev) => [commentToAdd, ...prev]);
+        }
       } catch (error) {
         console.log(error);
       }

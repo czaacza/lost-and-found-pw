@@ -50,6 +50,18 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       required: false,
     },
+    name: {
+      type: String,
+      required: false,
+    },
+    surname: {
+      type: String,
+      required: false,
+    },
+    phone: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 );

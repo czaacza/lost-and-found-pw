@@ -64,7 +64,7 @@ const Comment = ({
               <h5 className="font-semibold text-sm leading-tight dark:text-neutral-300">
                 {username}
               </h5>
-              <span className="text-xs text-gray-500 dark:text-gray-300">{date}</span>
+              <span className="text-xs text-gray-500 dark:text-gray-300">{date.slice(0, 10)}</span>
             </div>
             {user && user.username === username && (
               <div className="flex items-center space-x-2">

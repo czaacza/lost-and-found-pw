@@ -35,7 +35,7 @@ const CommentSection = ({ comments: initialComments, postId }) => {
       </div>
       <div className="separator mt-2 mb-2 mx-3"></div>
       <div>
-        <CommentComposer postId={postId} setComments={() => {}} />
+        <CommentComposer postId={postId} setComments={setComments} />
       </div>
     </div>
   );

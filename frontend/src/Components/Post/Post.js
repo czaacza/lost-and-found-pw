@@ -41,7 +41,7 @@ function Post({ post }) {
     date: post.createdAt.slice(0, 10),
     time: post.createdAt.slice(11, 16),
     description: post.text || '',
-    imageUrl: '../../img/boots.jpg',
+    imageUrl: post.userId.image,
     comments: post.comments,
     location: post.location,
     userId: post.userId._id,
@@ -71,6 +71,10 @@ function Post({ post }) {
     handleLike(postInfo.id);
   };
 
+  const handleAuthorClicked = (username) => {
+    window.location.href = `/profile/${username}`;
+  };
+
   return (
     <>
       {/* This is an example component */}
@@ -82,15 +86,14 @@ function Post({ post }) {
               <div
                 className="h-8 w-8 rounded-full bg-slate-400"
                 style={{
-                  backgroundImage: `${avatar}`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
               />{' '}
-              <div className="text-lg font-bold text-slate-700 dark:text-slate-400">
+              <button className="text-lg font-bold text-slate-700 dark:text-slate-400">
                 {' '}
                 {postInfo.author}{' '}
-              </div>
+              </button>
             </div>
             <div className="flex items-center space-x-8 relative">
               <div className="text-xs text-neutral-500">
@@ -137,7 +140,11 @@ function Post({ post }) {
           </div>
           <div className="mt-4 mb-6">
             <div className="mb-3 font-bold text-center text-gray-500 text-sm width-full">
-              {post.category === 'LOST' ? t('Lost') : t('Found')} {post.title}
+              {console.log('Post.title', post.title)}
+              {post.category === 'LOST' ? t('Lost') : t('Found')}{' '}
+              {post.title === 'item' || post.title === 'przedmiot'
+                ? t('item')
+                : post.title}
             </div>
             <div className="text-neutral-600 dark:text-neutral-50 px-2 text-md">
               {postInfo.description ? postInfo.description : ''}

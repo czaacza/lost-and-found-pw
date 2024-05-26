@@ -10,6 +10,7 @@ const {
   updateUser,
   deleteUser,
   logout,
+  saveUserDetails,
 } = require('../controllers/user');
 
 const {
@@ -62,6 +63,8 @@ router.post('/comments', verifyToken, addComment);
 
 router.delete('/comments/:id', verifyToken, deleteComment);
 router.post('/likes/:postId', verifyToken, handleLike);
+
+router.put('/user/profile', verifyToken, saveUserDetails);
 
 // router.post('/check-email', checkEmailExists);
 // router.post('/forgot-password', forgotPassword);
