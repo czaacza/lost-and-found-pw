@@ -12,7 +12,7 @@ import { useGlobalContext } from '../../context/GlobalContext';
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
-  const { theme, switchTheme } = useGlobalContext();
+  const { switchTheme } = useGlobalContext();
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [menuState, setMenuState] = useState(false);
@@ -55,7 +55,8 @@ const ProfileDropDown = (props) => {
     <div className={`relative ${props.class}`} ref={profileRef}>
       <div className="flex items-center space-x-4">
         <button
-          className="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 focus:ring-[#6A1515]"
+          className="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 focus:ring-[#6A1515] 
+            dark:ring-gray-600 dark:focus:ring-[#b81a1a]"
           onClick={() => setIsOpen(!isOpen)}
         >
           <img
@@ -163,6 +164,7 @@ const LanguageSwitcher = () => {
 };
 
 const NavbarComponent = () => {
+  const { theme } = useGlobalContext();
   const [t] = useTranslation();
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
@@ -213,7 +215,7 @@ const NavbarComponent = () => {
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
           <a href="/">
-            <img src={logo} width={150} height={50} alt="logo" />
+            <img src={ theme == "dark" ? logo_dark : logo } width={150} height={50} alt="logo" />
           </a>
         </div>
         <div className="flex-1 flex items-center justify-between">
@@ -259,6 +261,7 @@ const NavbarComponent = () => {
                       />
                     </svg>
                     <input
+                      className="dark:bg-black dark:text-white"
                       type="text"
                       placeholder={t('Search')}
                       value={searchTerm}

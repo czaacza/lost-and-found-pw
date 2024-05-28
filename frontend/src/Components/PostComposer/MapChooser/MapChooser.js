@@ -33,7 +33,7 @@ const MapChooser = ({ position, setPosition }) => {
 
   return (
     <div className="map-card mt-4 mb-4">
-      <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <div className="flex flex-col items-center bg-[#FFFFFF] dark:bg-neutral-800 border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:hover:bg-gray-700">
         <div className="flex flex-col justify-between p-4 leading-normal">
           <h5 className="mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">
             {t('Choose item location')}
