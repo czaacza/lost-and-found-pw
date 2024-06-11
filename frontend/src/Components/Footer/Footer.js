@@ -2,16 +2,20 @@
 
 import React from 'react';
 import logo from '../../img/lf-logo-pw.png';
+import logo_dark from '../../img/lf-logo-pw-dark.png';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 const Footer = () => {
+  const { theme } = useGlobalContext();
+
   return (
-    <footer className="footer p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+    <footer className="footer p-4 bg-[#fff] md:p-8 lg:p-10 dark:bg-neutral-800">
       <div className="mx-auto max-w-screen-xl text-center">
         <a
           href="/"
           className="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img src={logo} width={150} height={50} alt="logo" />
+          <img src={theme == "dark" ? logo_dark : logo} width={150} height={50} alt="logo" />
         </a>
         <p className="my-6 text-gray-500 dark:text-gray-400">
           Lost & Found service for the society of Warsaw University of

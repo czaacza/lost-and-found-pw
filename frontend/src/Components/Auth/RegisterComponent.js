@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; // Adjust the import path as necessary
 import logo from '../../img/lf-logo-pw-light.png'; // Adjust the import path for your logo
+import logo_dark from '../../img/lf-logo-pw-dark.png';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

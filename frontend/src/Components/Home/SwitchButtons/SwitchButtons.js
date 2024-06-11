@@ -27,7 +27,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
         {/* Button 1 */}
         <div
           className={`flex-1 flex items-center justify-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${
-            !isFoundChecked ? 'text-slate-100 bg-[#801919]' : 'text-body-color'
+            !isFoundChecked ? 'text-slate-100 bg-[#801919]' : 'text-body-color dark:text-slate-500'
           }`}
           onClick={() => setPostType('LOST')}
         >
@@ -37,7 +37,7 @@ const SwitchButtons = ({ postType, setPostType }) => {
         {/* Button 2 */}
         <div
           className={`flex-1 flex items-center justify-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${
-            isFoundChecked ? 'text-slate-100 bg-[#801919]' : 'text-body-color'
+            isFoundChecked ? 'text-slate-100 bg-[#801919]' : 'text-body-color dark:text-slate-500'
           }`}
           onClick={() => setPostType('FOUND')}
         >

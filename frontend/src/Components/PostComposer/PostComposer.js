@@ -99,13 +99,14 @@ function PostComposer({ postType, setPostType }) {
   };
 
   return (
-    <div className="post-composer container rounded-xl border p-4 pt-3 shadow-md w-10/12">
+    <div className="post-composer container rounded-xl border p-4 pt-3 shadow-md w-10/12
+                      dark:bg-neutral-800">
       {/* One Button, changes the text to Lost/Found when clicked and changes setPostType  */}
       <div className="mb-2 text-center font-bold text-gray-800 dark:text-white header-container">
         <div className="header-title">
           {t('I')}
           <span
-            className="mx-1 text-[#6a1515] cursor-pointer underline header-span"
+            className="mx-1 text-[#6a1515] dark:text-[#B81A1A] dark cursor-pointer underline header-span"
             onClick={() => setPostType(postType === 'LOST' ? 'FOUND' : 'LOST')}
           >
             {postType === 'LOST' ? t('lost') : t('found')}
@@ -127,7 +128,7 @@ function PostComposer({ postType, setPostType }) {
           </div>
           <div className="col input-container">
             <textarea
-              className="form-control input-field bg-gray-50"
+              className="form-control input-field bg-gray-50 dark:bg-gray-300"
               placeholder={t('Please describe the item you lost or found...')}
               rows="3" // Starts with 3 rows, but you can change this number
               value={text}
@@ -139,18 +140,18 @@ function PostComposer({ postType, setPostType }) {
         <div className="actions">
           <div className="action-buttons">
             <div
-              className="action bg-gray-50 hover:bg-gray-300"
+              className="action bg-gray-50 dark:bg-gray-300 dark:hover:bg-gray-400 hover:bg-gray-300"
               onClick={() => setShowFileUpload(!showFileUpload)}
             >
               <FontAwesomeIcon icon={faImage} />{' '}
               <p className="text-sm">{t('Photo or Video')}</p>
             </div>
-            <div className="action bg-gray-50 hover:bg-gray-300">
+            <div className="action bg-gray-50 dark:bg-gray-300 dark:hover:bg-gray-400 hover:bg-gray-300">
               <FontAwesomeIcon icon={faUserTag} />{' '}
               <p className="text-sm">{t('Tag')}</p>
             </div>
             <div
-              className="action bg-gray-50 hover:bg-gray-300"
+              className="action bg-gray-50 dark:bg-gray-300 dark:hover:bg-gray-400 hover:bg-gray-300"
               onClick={() => setShowLocation(!showLocation)}
             >
               <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../img/lf-logo-pw.png'; // Replace with the actual path to your logo
+import logo_dark from'../../img/lf-logo-pw-dark.png';
 import './NavbarComponent.css';
 import avatar from '../../img/avatar-placeholder.png';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { useGlobalContext } from '../../context/GlobalContext';
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
+  const { switchTheme } = useGlobalContext();
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [menuState, setMenuState] = useState(false);
@@ -23,6 +25,9 @@ const ProfileDropDown = (props) => {
     { title: t('Profile'), path: `/profile/${user.username}` },
     // { title: t('Settings'), path: 'javascript:void(0)' },
   ];
+  const handleSwitchTheme = () => {
+    switchTheme();
+  };
 
   const handleSubmitLogout = () => {
     handleLogout();
@@ -50,7 +55,8 @@ const ProfileDropDown = (props) => {
     <div className={`relative ${props.class}`} ref={profileRef}>
       <div className="flex items-center space-x-4">
         <button
-          className="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 focus:ring-[#6A1515]"
+          className="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 focus:ring-[#6A1515] 
+            dark:ring-gray-600 dark:focus:ring-[#b81a1a]"
           onClick={() => setIsOpen(!isOpen)}
         >
           <img
@@ -77,6 +83,15 @@ const ProfileDropDown = (props) => {
               <LanguageSwitcher />
             </div>
           </li>
+          <li>
+            <button
+              onClick={handleSwitchTheme}
+              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              {t('Switch theme')}
+            </button>
+          </li>
+        
           <li>
             <button
               onClick={handleSubmitLogout}
@@ -149,6 +164,7 @@ const LanguageSwitcher = () => {
 };
 
 const NavbarComponent = () => {
+  const { theme } = useGlobalContext();
   const [t] = useTranslation();
   const { user, loading } = useAuth(); // Use the 'user' to check if someone is logged in
   const [menuState, setMenuState] = useState(false);
@@ -195,16 +211,16 @@ const NavbarComponent = () => {
     { title: t('Map'), path: '/map' },
   ];
   return (
-    <nav className="bg-white border-b">
+    <nav className="border-b dark:bg-neutral-800">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
           <a href="/">
-            <img src={logo} width={150} height={50} alt="logo" />
+            <img src={ theme == "dark" ? logo_dark : logo } width={150} height={50} alt="logo" />
           </a>
         </div>
         <div className="flex-1 flex items-center justify-between">
           <div
-            className={`bg-white absolute z-20 w-5/6 top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${
+            className={`bg-[#FFFFFF] dark:bg-neutral-800 absolute z-20 w-5/6 top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${
               menuState ? '' : 'hidden'
             }`}
           >
@@ -212,13 +228,13 @@ const NavbarComponent = () => {
               {navigation.map((item, idx) => (
                 <li
                   key={idx}
-                  className="text-gray-900 hover:text-gray-900 font-normal"
+                  className="text-gray-900 dark:text-neutral-50 hover:text-gray-900 font-normal"
                 >
                   <a href={item.path}>{item.title}</a>
                 </li>
               ))}
               {user && !loading && (
-                <li className="text-gray-900 hover:text-gray-900 ">
+                <li className="text-gray-900 dark:text-neutral-50 hover:text-gray-900 ">
                   <a href={`/profile/${user.username}`} className="font-normal">
                     {t('Profile')}
                   </a>
@@ -245,6 +261,7 @@ const NavbarComponent = () => {
                       />
                     </svg>
                     <input
+                      className="dark:bg-black dark:text-white"
                       type="text"
                       placeholder={t('Search')}
                       value={searchTerm}
@@ -279,13 +296,13 @@ const NavbarComponent = () => {
                 <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                   <a
                     href="/login"
-                    className="block text-gray-700 hover:text-gray-900"
+                    className="block text-gray-900 dark:text-neutral-50"
                   >
-                    {t('Log in')}
+                    <span className="dark:text-neutral-50">{t('Log in')}</span>
                   </a>
                   <a
                     href="/signup"
-                    className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-[#6A1515] hover:bg-[#6A1515] active:bg-[#6A1515] rounded-full md:inline-flex"
+                    className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-red-800 hover:bg-[#6A1515] active:bg-[#6A1515] rounded-full md:inline-flex"
                   >
                     {t('Sign up')}
                     <svg

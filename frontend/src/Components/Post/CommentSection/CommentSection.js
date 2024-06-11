@@ -16,7 +16,7 @@ const CommentSection = ({ comments: initialComments, postId }) => {
 
   return (
     <div>
-      <div className="bg-white p-1  rounded-lg space-y-4">
+      <div className="bg-[#FFFFFF] dark:bg-neutral-800 p-1  rounded-lg space-y-4">
         {comments.map((comment, index) => (
           <div key={comment._id} className="my-0">
             {' '}

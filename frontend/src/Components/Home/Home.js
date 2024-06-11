@@ -17,30 +17,30 @@ function Home() {
 
   const sortPosts = (sortOrder) => {
     getPosts(sortOrder);
-  };
+  };  
 
   return (
     <div className="container home">
       <div className="row">
         {/* Left Column */}
-        <div className="col-md-2 left-column">
+        <div className="col-md-2 left-column dark:text-neutral-50">
           <div className="sort-section">
-            <p className="text-center text-lg font-normal	">{t('Sort with')}</p>
+            <p className="text-center text-lg font-normal">{t('Sort with')}</p>
             <div className="buttons-row">
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('newest')}
               >
                 {t('Newest')}
               </button>
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('oldest')}
               >
                 {t('Oldest')}
               </button>
               <button
-                className="btn btn-sort"
+                className="btn btn-sort bg-[#9CA3AF] dark:bg-slate-700"
                 onClick={() => sortPosts('most-comments')}
               >
                 {t('Most active')}
@@ -69,12 +69,12 @@ function Home() {
         </div>
 
         {/* Right Column */}
-        <div className="col-md-2 right-column">
+        <div className="col-md-2 right-column dark:text-neutral-400">
           <h3>{t('Popular locations')}:</h3>
           <ul className="list-group">
-            <li className="list-group-item">{t('Chemistry Building')} (54)</li>
-            <li className="list-group-item">{t('Physics Building')} (37)</li>
-            <li className="list-group-item">{t('MiNi Building')} (16)</li>
+            <li className="list-group-item dark:text-neutral-50">{t('Chemistry Building')} (54)</li>
+            <li className="list-group-item dark:text-neutral-50">{t('Physics Building')} (37)</li>
+            <li className="list-group-item dark:text-neutral-50">{t('MiNi Building')} (16)</li>
           </ul>
         </div>
       </div>
